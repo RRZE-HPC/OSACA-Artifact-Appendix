@@ -110,11 +110,12 @@ Additionally, one must add the LLVM-MCA markers in the following format:
 ```
 All marked assembly files can be also found in the kernel-specific directory in [thesis_analysis_reports/](./thesis_analysis_reports).
 
-The prediction generation must be done separately for Marvell ThunderX2 and the x86 systems. Run 
+Since the `-mcpu=thunderx2t99` flag is only known to the ARM compiler,
+the prediction generation must be done separately for LLVM-MCA on Marvell ThunderX2 and all others. Run 
 ```
 ./run_predictions.sh ISA
 ```
-The parameter `ISA` can be either `aarch64` or `x86`.
+The parameter `ISA` can be either `aarch64` (for running LLVM-MCA on TX2) or `x86` (for running the rest).
 Note that for this we expect the commands `osaca`, `llvm-mca`, `iaca`, and `gcc` to be part of the environment.
 
 
