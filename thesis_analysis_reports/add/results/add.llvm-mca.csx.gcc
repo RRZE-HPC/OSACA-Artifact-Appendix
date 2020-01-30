@@ -1,0 +1,248 @@
+
+[0] Code Region
+
+Iterations:        100
+Instructions:      2700
+Total Cycles:      821
+Total uOps:        4300
+
+Dispatch Width:    6
+uOps Per Cycle:    5.24
+IPC:               3.29
+Block RThroughput: 8.0
+
+
+Instruction Info:
+[1]: #uOps
+[2]: Latency
+[3]: RThroughput
+[4]: MayLoad
+[5]: MayStore
+[6]: HasSideEffects (U)
+
+[1]    [2]    [3]    [4]    [5]    [6]    Instructions:
+ 1      7     0.50    *                   vmovupd	(%r14,%rax), %ymm3
+ 1      7     0.50    *                   vmovupd	32(%r14,%rax), %ymm4
+ 1      7     0.50    *                   vmovupd	64(%r14,%rax), %ymm6
+ 1      7     0.50    *                   vmovupd	96(%r14,%rax), %ymm9
+ 1      7     0.50    *                   vmovupd	128(%r14,%rax), %ymm11
+ 1      7     0.50    *                   vmovupd	160(%r14,%rax), %ymm13
+ 1      7     0.50    *                   vmovupd	192(%r14,%rax), %ymm15
+ 1      7     0.50    *                   vmovupd	224(%r14,%rax), %ymm0
+ 2      11    0.50    *                   vaddpd	(%r13,%rax), %ymm3, %ymm7
+ 2      11    0.50    *                   vaddpd	32(%r13,%rax), %ymm4, %ymm5
+ 2      11    0.50    *                   vaddpd	64(%r13,%rax), %ymm6, %ymm8
+ 2      11    0.50    *                   vaddpd	96(%r13,%rax), %ymm9, %ymm10
+ 2      11    0.50    *                   vaddpd	128(%r13,%rax), %ymm11, %ymm12
+ 2      11    0.50    *                   vaddpd	160(%r13,%rax), %ymm13, %ymm14
+ 2      11    0.50    *                   vaddpd	192(%r13,%rax), %ymm15, %ymm1
+ 2      11    0.50    *                   vaddpd	224(%r13,%rax), %ymm0, %ymm2
+ 2      1     1.00           *            vmovupd	%ymm7, (%r12,%rax)
+ 2      1     1.00           *            vmovupd	%ymm5, 32(%r12,%rax)
+ 2      1     1.00           *            vmovupd	%ymm8, 64(%r12,%rax)
+ 2      1     1.00           *            vmovupd	%ymm10, 96(%r12,%rax)
+ 2      1     1.00           *            vmovupd	%ymm12, 128(%r12,%rax)
+ 2      1     1.00           *            vmovupd	%ymm14, 160(%r12,%rax)
+ 2      1     1.00           *            vmovupd	%ymm1, 192(%r12,%rax)
+ 2      1     1.00           *            vmovupd	%ymm2, 224(%r12,%rax)
+ 1      1     0.25                        addq	$256, %rax
+ 1      1     0.25                        cmpq	%rax, %rcx
+ 1      1     0.50                        jne	.L19
+
+
+Resources:
+[0]   - SKXDivider
+[1]   - SKXFPDivider
+[2]   - SKXPort0
+[3]   - SKXPort1
+[4]   - SKXPort2
+[5]   - SKXPort3
+[6]   - SKXPort4
+[7]   - SKXPort5
+[8]   - SKXPort6
+[9]   - SKXPort7
+
+
+Resource pressure per iteration:
+[0]    [1]    [2]    [3]    [4]    [5]    [6]    [7]    [8]    [9]    
+ -      -     4.00   4.00   8.05   8.06   8.00   1.49   1.51   7.89   
+
+Resource pressure by instruction:
+[0]    [1]    [2]    [3]    [4]    [5]    [6]    [7]    [8]    [9]    Instructions:
+ -      -      -      -      -     1.00    -      -      -      -     vmovupd	(%r14,%rax), %ymm3
+ -      -      -      -     1.00    -      -      -      -      -     vmovupd	32(%r14,%rax), %ymm4
+ -      -      -      -      -     1.00    -      -      -      -     vmovupd	64(%r14,%rax), %ymm6
+ -      -      -      -     1.00    -      -      -      -      -     vmovupd	96(%r14,%rax), %ymm9
+ -      -      -      -      -     1.00    -      -      -      -     vmovupd	128(%r14,%rax), %ymm11
+ -      -      -      -     1.00    -      -      -      -      -     vmovupd	160(%r14,%rax), %ymm13
+ -      -      -      -      -     1.00    -      -      -      -     vmovupd	192(%r14,%rax), %ymm15
+ -      -      -      -     1.00    -      -      -      -      -     vmovupd	224(%r14,%rax), %ymm0
+ -      -      -     1.00    -     1.00    -      -      -      -     vaddpd	(%r13,%rax), %ymm3, %ymm7
+ -      -     1.00    -     1.00    -      -      -      -      -     vaddpd	32(%r13,%rax), %ymm4, %ymm5
+ -      -      -     1.00    -     1.00    -      -      -      -     vaddpd	64(%r13,%rax), %ymm6, %ymm8
+ -      -     1.00    -     1.00    -      -      -      -      -     vaddpd	96(%r13,%rax), %ymm9, %ymm10
+ -      -      -     1.00    -     1.00    -      -      -      -     vaddpd	128(%r13,%rax), %ymm11, %ymm12
+ -      -     1.00    -     1.00    -      -      -      -      -     vaddpd	160(%r13,%rax), %ymm13, %ymm14
+ -      -      -     1.00    -     1.00    -      -      -      -     vaddpd	192(%r13,%rax), %ymm15, %ymm1
+ -      -     1.00    -     1.00    -      -      -      -      -     vaddpd	224(%r13,%rax), %ymm0, %ymm2
+ -      -      -      -      -     0.01   1.00    -      -     0.99   vmovupd	%ymm7, (%r12,%rax)
+ -      -      -      -     0.01   0.01   1.00    -      -     0.98   vmovupd	%ymm5, 32(%r12,%rax)
+ -      -      -      -     0.01    -     1.00    -      -     0.99   vmovupd	%ymm8, 64(%r12,%rax)
+ -      -      -      -      -     0.01   1.00    -      -     0.99   vmovupd	%ymm10, 96(%r12,%rax)
+ -      -      -      -     0.01   0.01   1.00    -      -     0.98   vmovupd	%ymm12, 128(%r12,%rax)
+ -      -      -      -     0.01    -     1.00    -      -     0.99   vmovupd	%ymm14, 160(%r12,%rax)
+ -      -      -      -      -     0.01   1.00    -      -     0.99   vmovupd	%ymm1, 192(%r12,%rax)
+ -      -      -      -     0.01   0.01   1.00    -      -     0.98   vmovupd	%ymm2, 224(%r12,%rax)
+ -      -      -      -      -      -      -     0.99   0.01    -     addq	$256, %rax
+ -      -      -      -      -      -      -     0.50   0.50    -     cmpq	%rax, %rcx
+ -      -      -      -      -      -      -      -     1.00    -     jne	.L19
+
+
+Timeline view:
+                    0123456789          0123456789          012
+Index     0123456789          0123456789          0123456789   
+
+[0,0]     DeeeeeeeER.    .    .    .    .    .    .    .    . .   vmovupd	(%r14,%rax), %ymm3
+[0,1]     DeeeeeeeER.    .    .    .    .    .    .    .    . .   vmovupd	32(%r14,%rax), %ymm4
+[0,2]     D=eeeeeeeER    .    .    .    .    .    .    .    . .   vmovupd	64(%r14,%rax), %ymm6
+[0,3]     D=eeeeeeeER    .    .    .    .    .    .    .    . .   vmovupd	96(%r14,%rax), %ymm9
+[0,4]     D==eeeeeeeER   .    .    .    .    .    .    .    . .   vmovupd	128(%r14,%rax), %ymm11
+[0,5]     D==eeeeeeeER   .    .    .    .    .    .    .    . .   vmovupd	160(%r14,%rax), %ymm13
+[0,6]     .D==eeeeeeeER  .    .    .    .    .    .    .    . .   vmovupd	192(%r14,%rax), %ymm15
+[0,7]     .D==eeeeeeeER  .    .    .    .    .    .    .    . .   vmovupd	224(%r14,%rax), %ymm0
+[0,8]     .D===eeeeeeeeeeeER  .    .    .    .    .    .    . .   vaddpd	(%r13,%rax), %ymm3, %ymm7
+[0,9]     .D===eeeeeeeeeeeER  .    .    .    .    .    .    . .   vaddpd	32(%r13,%rax), %ymm4, %ymm5
+[0,10]    . D===eeeeeeeeeeeER .    .    .    .    .    .    . .   vaddpd	64(%r13,%rax), %ymm6, %ymm8
+[0,11]    . D===eeeeeeeeeeeER .    .    .    .    .    .    . .   vaddpd	96(%r13,%rax), %ymm9, %ymm10
+[0,12]    . D====eeeeeeeeeeeER.    .    .    .    .    .    . .   vaddpd	128(%r13,%rax), %ymm11, %ymm12
+[0,13]    .  D===eeeeeeeeeeeER.    .    .    .    .    .    . .   vaddpd	160(%r13,%rax), %ymm13, %ymm14
+[0,14]    .  D====eeeeeeeeeeeER    .    .    .    .    .    . .   vaddpd	192(%r13,%rax), %ymm15, %ymm1
+[0,15]    .  D====eeeeeeeeeeeER    .    .    .    .    .    . .   vaddpd	224(%r13,%rax), %ymm0, %ymm2
+[0,16]    .   D==============eER   .    .    .    .    .    . .   vmovupd	%ymm7, (%r12,%rax)
+[0,17]    .   D===============eER  .    .    .    .    .    . .   vmovupd	%ymm5, 32(%r12,%rax)
+[0,18]    .   D================eER .    .    .    .    .    . .   vmovupd	%ymm8, 64(%r12,%rax)
+[0,19]    .    D================eER.    .    .    .    .    . .   vmovupd	%ymm10, 96(%r12,%rax)
+[0,20]    .    D=================eER    .    .    .    .    . .   vmovupd	%ymm12, 128(%r12,%rax)
+[0,21]    .    D==================eER   .    .    .    .    . .   vmovupd	%ymm14, 160(%r12,%rax)
+[0,22]    .    .D==================eER  .    .    .    .    . .   vmovupd	%ymm1, 192(%r12,%rax)
+[0,23]    .    .D===================eER .    .    .    .    . .   vmovupd	%ymm2, 224(%r12,%rax)
+[0,24]    .    .DeE-------------------R .    .    .    .    . .   addq	$256, %rax
+[0,25]    .    .D=eE------------------R .    .    .    .    . .   cmpq	%rax, %rcx
+[0,26]    .    . D=eE-----------------R .    .    .    .    . .   jne	.L19
+[1,0]     .    . D=eeeeeeeE-----------R .    .    .    .    . .   vmovupd	(%r14,%rax), %ymm3
+[1,1]     .    . D=eeeeeeeE-----------R .    .    .    .    . .   vmovupd	32(%r14,%rax), %ymm4
+[1,2]     .    . D==eeeeeeeE----------R .    .    .    .    . .   vmovupd	64(%r14,%rax), %ymm6
+[1,3]     .    . D==eeeeeeeE----------R .    .    .    .    . .   vmovupd	96(%r14,%rax), %ymm9
+[1,4]     .    . D===eeeeeeeE---------R .    .    .    .    . .   vmovupd	128(%r14,%rax), %ymm11
+[1,5]     .    .  D==eeeeeeeE---------R .    .    .    .    . .   vmovupd	160(%r14,%rax), %ymm13
+[1,6]     .    .  D===eeeeeeeE--------R .    .    .    .    . .   vmovupd	192(%r14,%rax), %ymm15
+[1,7]     .    .  D===eeeeeeeE--------R .    .    .    .    . .   vmovupd	224(%r14,%rax), %ymm0
+[1,8]     .    .  D====eeeeeeeeeeeE---R .    .    .    .    . .   vaddpd	(%r13,%rax), %ymm3, %ymm7
+[1,9]     .    .   D===eeeeeeeeeeeE---R .    .    .    .    . .   vaddpd	32(%r13,%rax), %ymm4, %ymm5
+[1,10]    .    .   D====eeeeeeeeeeeE--R .    .    .    .    . .   vaddpd	64(%r13,%rax), %ymm6, %ymm8
+[1,11]    .    .   D====eeeeeeeeeeeE--R .    .    .    .    . .   vaddpd	96(%r13,%rax), %ymm9, %ymm10
+[1,12]    .    .    D====eeeeeeeeeeeE-R .    .    .    .    . .   vaddpd	128(%r13,%rax), %ymm11, %ymm12
+[1,13]    .    .    D====eeeeeeeeeeeE-R .    .    .    .    . .   vaddpd	160(%r13,%rax), %ymm13, %ymm14
+[1,14]    .    .    D=====eeeeeeeeeeeER .    .    .    .    . .   vaddpd	192(%r13,%rax), %ymm15, %ymm1
+[1,15]    .    .    .D====eeeeeeeeeeeER .    .    .    .    . .   vaddpd	224(%r13,%rax), %ymm0, %ymm2
+[1,16]    .    .    .D===============eER.    .    .    .    . .   vmovupd	%ymm7, (%r12,%rax)
+[1,17]    .    .    .D================eER    .    .    .    . .   vmovupd	%ymm5, 32(%r12,%rax)
+[1,18]    .    .    . D================eER   .    .    .    . .   vmovupd	%ymm8, 64(%r12,%rax)
+[1,19]    .    .    . D=================eER  .    .    .    . .   vmovupd	%ymm10, 96(%r12,%rax)
+[1,20]    .    .    . D==================eER .    .    .    . .   vmovupd	%ymm12, 128(%r12,%rax)
+[1,21]    .    .    .  D==================eER.    .    .    . .   vmovupd	%ymm14, 160(%r12,%rax)
+[1,22]    .    .    .  D===================eER    .    .    . .   vmovupd	%ymm1, 192(%r12,%rax)
+[1,23]    .    .    .  D====================eER   .    .    . .   vmovupd	%ymm2, 224(%r12,%rax)
+[1,24]    .    .    .   DeE-------------------R   .    .    . .   addq	$256, %rax
+[1,25]    .    .    .   D=eE------------------R   .    .    . .   cmpq	%rax, %rcx
+[1,26]    .    .    .   D==eE-----------------R   .    .    . .   jne	.L19
+[2,0]     .    .    .   D==eeeeeeeE-----------R   .    .    . .   vmovupd	(%r14,%rax), %ymm3
+[2,1]     .    .    .   D==eeeeeeeE-----------R   .    .    . .   vmovupd	32(%r14,%rax), %ymm4
+[2,2]     .    .    .   D===eeeeeeeE----------R   .    .    . .   vmovupd	64(%r14,%rax), %ymm6
+[2,3]     .    .    .    D==eeeeeeeE----------R   .    .    . .   vmovupd	96(%r14,%rax), %ymm9
+[2,4]     .    .    .    D===eeeeeeeE---------R   .    .    . .   vmovupd	128(%r14,%rax), %ymm11
+[2,5]     .    .    .    D===eeeeeeeE---------R   .    .    . .   vmovupd	160(%r14,%rax), %ymm13
+[2,6]     .    .    .    D====eeeeeeeE--------R   .    .    . .   vmovupd	192(%r14,%rax), %ymm15
+[2,7]     .    .    .    D====eeeeeeeE--------R   .    .    . .   vmovupd	224(%r14,%rax), %ymm0
+[2,8]     .    .    .    .D====eeeeeeeeeeeE---R   .    .    . .   vaddpd	(%r13,%rax), %ymm3, %ymm7
+[2,9]     .    .    .    .D====eeeeeeeeeeeE---R   .    .    . .   vaddpd	32(%r13,%rax), %ymm4, %ymm5
+[2,10]    .    .    .    .D=====eeeeeeeeeeeE--R   .    .    . .   vaddpd	64(%r13,%rax), %ymm6, %ymm8
+[2,11]    .    .    .    . D====eeeeeeeeeeeE--R   .    .    . .   vaddpd	96(%r13,%rax), %ymm9, %ymm10
+[2,12]    .    .    .    . D=====eeeeeeeeeeeE-R   .    .    . .   vaddpd	128(%r13,%rax), %ymm11, %ymm12
+[2,13]    .    .    .    . D=====eeeeeeeeeeeE-R   .    .    . .   vaddpd	160(%r13,%rax), %ymm13, %ymm14
+[2,14]    .    .    .    .  D=====eeeeeeeeeeeER   .    .    . .   vaddpd	192(%r13,%rax), %ymm15, %ymm1
+[2,15]    .    .    .    .  D=====eeeeeeeeeeeER   .    .    . .   vaddpd	224(%r13,%rax), %ymm0, %ymm2
+[2,16]    .    .    .    .  D================eER  .    .    . .   vmovupd	%ymm7, (%r12,%rax)
+[2,17]    .    .    .    .   D================eER .    .    . .   vmovupd	%ymm5, 32(%r12,%rax)
+[2,18]    .    .    .    .   D=================eER.    .    . .   vmovupd	%ymm8, 64(%r12,%rax)
+[2,19]    .    .    .    .   D==================eER    .    . .   vmovupd	%ymm10, 96(%r12,%rax)
+[2,20]    .    .    .    .    D==================eER   .    . .   vmovupd	%ymm12, 128(%r12,%rax)
+[2,21]    .    .    .    .    D===================eER  .    . .   vmovupd	%ymm14, 160(%r12,%rax)
+[2,22]    .    .    .    .    D====================eER .    . .   vmovupd	%ymm1, 192(%r12,%rax)
+[2,23]    .    .    .    .    .D====================eER.    . .   vmovupd	%ymm2, 224(%r12,%rax)
+[2,24]    .    .    .    .    .DeE--------------------R.    . .   addq	$256, %rax
+[2,25]    .    .    .    .    .D=eE-------------------R.    . .   cmpq	%rax, %rcx
+[2,26]    .    .    .    .    .D==eE------------------R.    . .   jne	.L19
+[3,0]     .    .    .    .    .D===eeeeeeeE-----------R.    . .   vmovupd	(%r14,%rax), %ymm3
+[3,1]     .    .    .    .    . D==eeeeeeeE-----------R.    . .   vmovupd	32(%r14,%rax), %ymm4
+[3,2]     .    .    .    .    . D===eeeeeeeE----------R.    . .   vmovupd	64(%r14,%rax), %ymm6
+[3,3]     .    .    .    .    . D===eeeeeeeE----------R.    . .   vmovupd	96(%r14,%rax), %ymm9
+[3,4]     .    .    .    .    . D====eeeeeeeE---------R.    . .   vmovupd	128(%r14,%rax), %ymm11
+[3,5]     .    .    .    .    . D====eeeeeeeE---------R.    . .   vmovupd	160(%r14,%rax), %ymm13
+[3,6]     .    .    .    .    . D=====eeeeeeeE--------R.    . .   vmovupd	192(%r14,%rax), %ymm15
+[3,7]     .    .    .    .    .  D====eeeeeeeE--------R.    . .   vmovupd	224(%r14,%rax), %ymm0
+[3,8]     .    .    .    .    .  D=====eeeeeeeeeeeE---R.    . .   vaddpd	(%r13,%rax), %ymm3, %ymm7
+[3,9]     .    .    .    .    .  D=====eeeeeeeeeeeE---R.    . .   vaddpd	32(%r13,%rax), %ymm4, %ymm5
+[3,10]    .    .    .    .    .   D=====eeeeeeeeeeeE--R.    . .   vaddpd	64(%r13,%rax), %ymm6, %ymm8
+[3,11]    .    .    .    .    .   D=====eeeeeeeeeeeE--R.    . .   vaddpd	96(%r13,%rax), %ymm9, %ymm10
+[3,12]    .    .    .    .    .   D======eeeeeeeeeeeE-R.    . .   vaddpd	128(%r13,%rax), %ymm11, %ymm12
+[3,13]    .    .    .    .    .    D=====eeeeeeeeeeeE-R.    . .   vaddpd	160(%r13,%rax), %ymm13, %ymm14
+[3,14]    .    .    .    .    .    D======eeeeeeeeeeeER.    . .   vaddpd	192(%r13,%rax), %ymm15, %ymm1
+[3,15]    .    .    .    .    .    D======eeeeeeeeeeeER.    . .   vaddpd	224(%r13,%rax), %ymm0, %ymm2
+[3,16]    .    .    .    .    .    .D================eER    . .   vmovupd	%ymm7, (%r12,%rax)
+[3,17]    .    .    .    .    .    .D=================eER   . .   vmovupd	%ymm5, 32(%r12,%rax)
+[3,18]    .    .    .    .    .    .D==================eER  . .   vmovupd	%ymm8, 64(%r12,%rax)
+[3,19]    .    .    .    .    .    . D==================eER . .   vmovupd	%ymm10, 96(%r12,%rax)
+[3,20]    .    .    .    .    .    . D===================eER. .   vmovupd	%ymm12, 128(%r12,%rax)
+[3,21]    .    .    .    .    .    . D====================eER .   vmovupd	%ymm14, 160(%r12,%rax)
+[3,22]    .    .    .    .    .    .  D====================eER.   vmovupd	%ymm1, 192(%r12,%rax)
+[3,23]    .    .    .    .    .    .  D=====================eER   vmovupd	%ymm2, 224(%r12,%rax)
+[3,24]    .    .    .    .    .    .  DeE---------------------R   addq	$256, %rax
+[3,25]    .    .    .    .    .    .  D=eE--------------------R   cmpq	%rax, %rcx
+[3,26]    .    .    .    .    .    .   D=eE-------------------R   jne	.L19
+
+
+Average Wait times (based on the timeline view):
+[0]: Executions
+[1]: Average time spent waiting in a scheduler's queue
+[2]: Average time spent waiting in a scheduler's queue while ready
+[3]: Average time elapsed from WB until retire stage
+
+      [0]    [1]    [2]    [3]
+0.     4     2.5    1.3    8.3       vmovupd	(%r14,%rax), %ymm3
+1.     4     2.3    1.3    8.3       vmovupd	32(%r14,%rax), %ymm4
+2.     4     3.3    2.3    7.5       vmovupd	64(%r14,%rax), %ymm6
+3.     4     3.0    2.3    7.5       vmovupd	96(%r14,%rax), %ymm9
+4.     4     4.0    3.3    6.8       vmovupd	128(%r14,%rax), %ymm11
+5.     4     3.8    3.3    6.8       vmovupd	160(%r14,%rax), %ymm13
+6.     4     4.5    4.0    6.0       vmovupd	192(%r14,%rax), %ymm15
+7.     4     4.3    4.0    6.0       vmovupd	224(%r14,%rax), %ymm0
+8.     4     5.0    4.0    2.3       vaddpd	(%r13,%rax), %ymm3, %ymm7
+9.     4     4.8    4.0    2.3       vaddpd	32(%r13,%rax), %ymm4, %ymm5
+10.    4     5.3    4.0    1.5       vaddpd	64(%r13,%rax), %ymm6, %ymm8
+11.    4     5.0    4.0    1.5       vaddpd	96(%r13,%rax), %ymm9, %ymm10
+12.    4     5.8    4.0    0.8       vaddpd	128(%r13,%rax), %ymm11, %ymm12
+13.    4     5.3    4.0    0.8       vaddpd	160(%r13,%rax), %ymm13, %ymm14
+14.    4     6.0    4.0    0.0       vaddpd	192(%r13,%rax), %ymm15, %ymm1
+15.    4     5.8    4.0    0.0       vaddpd	224(%r13,%rax), %ymm0, %ymm2
+16.    4     16.3   0.0    0.0       vmovupd	%ymm7, (%r12,%rax)
+17.    4     17.0   0.0    0.0       vmovupd	%ymm5, 32(%r12,%rax)
+18.    4     17.8   0.0    0.0       vmovupd	%ymm8, 64(%r12,%rax)
+19.    4     18.3   0.0    0.0       vmovupd	%ymm10, 96(%r12,%rax)
+20.    4     19.0   0.0    0.0       vmovupd	%ymm12, 128(%r12,%rax)
+21.    4     19.8   0.0    0.0       vmovupd	%ymm14, 160(%r12,%rax)
+22.    4     20.3   0.0    0.0       vmovupd	%ymm1, 192(%r12,%rax)
+23.    4     21.0   0.0    0.0       vmovupd	%ymm2, 224(%r12,%rax)
+24.    4     1.0    1.0    19.8      addq	$256, %rax
+25.    4     2.0    0.0    18.8      cmpq	%rax, %rcx
+26.    4     2.5    0.0    17.8      jne	.L19

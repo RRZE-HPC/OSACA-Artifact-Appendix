@@ -1,0 +1,35 @@
+Open Source Architecture Code Analyzer (OSACA) - v0.3
+Analyzed file:      sum_reduction.s.csx.gcc.s
+Architecture:       csx
+Timestamp:          2020-01-28 09:09:27
+
+ P - Throughput of LOAD operation can be hidden behind a past or future STORE instruction
+ * - Instruction micro-ops not bound to a port
+ X - No throughput/latency information for this instruction in data file
+
+
+Combined Analysis Report
+------------------------
+                                     Port pressure in cycles                                     
+     |  0   - 0DV  |  1   |  2   -  2D  |  3   -  3D  |  4   |  5   |  6   |  7   ||  CP  | LCD  |
+-------------------------------------------------------------------------------------------------
+ 305 |             |      |             |             |      |      |      |      ||      |      |   .L19:
+ 306 | 0.50        | 0.50 | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||  8.0 |  4.0 |   vaddpd	(%rcx), %ymm3, %ymm4
+ 307 | 0.00        | 0.00 |             |             |      | 0.50 | 0.50 |      ||      |      |   addq	$256, %rcx
+ 308 | 0.50        | 0.50 | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||  4.0 |  4.0 |   vaddpd	-224(%rcx), %ymm4, %ymm5
+ 309 | 0.50        | 0.50 | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||  4.0 |  4.0 |   vaddpd	-192(%rcx), %ymm5, %ymm6
+ 310 | 0.50        | 0.50 | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||  4.0 |  4.0 |   vaddpd	-160(%rcx), %ymm6, %ymm8
+ 311 | 0.50        | 0.50 | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||  4.0 |  4.0 |   vaddpd	-128(%rcx), %ymm8, %ymm9
+ 312 | 0.50        | 0.50 | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||  4.0 |  4.0 |   vaddpd	-96(%rcx), %ymm9, %ymm10
+ 313 | 0.50        | 0.50 | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||  4.0 |  4.0 |   vaddpd	-64(%rcx), %ymm10, %ymm11
+ 314 | 0.50        | 0.50 | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||  4.0 |  4.0 |   vaddpd	-32(%rcx), %ymm11, %ymm3
+ 315 | 0.00        | 0.00 |             |             |      | 0.50 | 0.50 |      ||      |      |   cmpq	%rcx, %r15
+ 316 |             |      |             |             |      |      |      |      ||      |      | * jne	.L19
+
+       4.00          4.00   4.00   4.00   4.00   4.00          1.00   1.00           36.0   32.0 
+
+
+Loop-Carried Dependencies Analysis Report
+-----------------------------------------
+ 314 | 32.0 | vaddpd	-32(%rcx), %ymm11, %ymm3     | [306, 308, 309, 310, 311, 312, 313, 314]
+ 315 |  2.0 | cmpq	%rcx, %r15                     | [307, 315]

@@ -1,0 +1,101 @@
+
+[0] Code Region
+
+Iterations:        100
+Instructions:      600
+Total Cycles:      181
+Total uOps:        900
+
+Dispatch Width:    6
+uOps Per Cycle:    4.97
+IPC:               3.31
+Block RThroughput: 1.5
+
+
+Instruction Info:
+[1]: #uOps
+[2]: Latency
+[3]: RThroughput
+[4]: MayLoad
+[5]: MayStore
+[6]: HasSideEffects (U)
+
+[1]    [2]    [3]    [4]    [5]    [6]    Instructions:
+ 2      8     0.50    *                   vmovups	(%r13,%rax,8), %zmm1
+ 2      11    0.50    *                   vfmadd213pd	(%rcx,%rax,8), %zmm2, %zmm1
+ 2      1     1.00           *            vmovupd	%zmm1, (%r14,%rax,8)
+ 1      1     0.25                        addq	$8, %rax
+ 1      1     0.25                        cmpq	%r12, %rax
+ 1      1     0.50                        jb	..B1.40
+
+
+Resources:
+[0]   - SKXDivider
+[1]   - SKXFPDivider
+[2]   - SKXPort0
+[3]   - SKXPort1
+[4]   - SKXPort2
+[5]   - SKXPort3
+[6]   - SKXPort4
+[7]   - SKXPort5
+[8]   - SKXPort6
+[9]   - SKXPort7
+
+
+Resource pressure per iteration:
+[0]    [1]    [2]    [3]    [4]    [5]    [6]    [7]    [8]    [9]    
+ -      -     1.25   1.25   1.01   1.03   1.00   1.25   1.25   0.96   
+
+Resource pressure by instruction:
+[0]    [1]    [2]    [3]    [4]    [5]    [6]    [7]    [8]    [9]    Instructions:
+ -      -     0.24   0.34    -     1.00    -     0.42    -      -     vmovups	(%r13,%rax,8), %zmm1
+ -      -     0.17    -     1.00    -      -     0.83    -      -     vfmadd213pd	(%rcx,%rax,8), %zmm2, %zmm1
+ -      -      -      -     0.01   0.03   1.00    -      -     0.96   vmovupd	%zmm1, (%r14,%rax,8)
+ -      -     0.17   0.48    -      -      -      -     0.35    -     addq	$8, %rax
+ -      -     0.16   0.43    -      -      -      -     0.41    -     cmpq	%r12, %rax
+ -      -     0.51    -      -      -      -      -     0.49    -     jb	..B1.40
+
+
+Timeline view:
+                    0123456789 
+Index     0123456789          0
+
+[0,0]     DeeeeeeeeER    .    .   vmovups	(%r13,%rax,8), %zmm1
+[0,1]     D=eeeeeeeeeeeER.    .   vfmadd213pd	(%rcx,%rax,8), %zmm2, %zmm1
+[0,2]     D============eER    .   vmovupd	%zmm1, (%r14,%rax,8)
+[0,3]     .DeE-----------R    .   addq	$8, %rax
+[0,4]     .D=eE----------R    .   cmpq	%r12, %rax
+[0,5]     .D==eE---------R    .   jb	..B1.40
+[1,0]     .D=eeeeeeeeE---R    .   vmovups	(%r13,%rax,8), %zmm1
+[1,1]     . D=eeeeeeeeeeeER   .   vfmadd213pd	(%rcx,%rax,8), %zmm2, %zmm1
+[1,2]     . D============eER  .   vmovupd	%zmm1, (%r14,%rax,8)
+[1,3]     . DeE------------R  .   addq	$8, %rax
+[1,4]     . D=eE-----------R  .   cmpq	%r12, %rax
+[1,5]     .  D=eE----------R  .   jb	..B1.40
+[2,0]     .  D=eeeeeeeeE---R  .   vmovups	(%r13,%rax,8), %zmm1
+[2,1]     .  D==eeeeeeeeeeeER .   vfmadd213pd	(%rcx,%rax,8), %zmm2, %zmm1
+[2,2]     .   D============eER.   vmovupd	%zmm1, (%r14,%rax,8)
+[2,3]     .   DeE------------R.   addq	$8, %rax
+[2,4]     .   D=eE-----------R.   cmpq	%r12, %rax
+[2,5]     .   D==eE----------R.   jb	..B1.40
+[3,0]     .    DeeeeeeeeE----R.   vmovups	(%r13,%rax,8), %zmm1
+[3,1]     .    D=eeeeeeeeeeeER.   vfmadd213pd	(%rcx,%rax,8), %zmm2, %zmm1
+[3,2]     .    D============eER   vmovupd	%zmm1, (%r14,%rax,8)
+[3,3]     .    .DeE-----------R   addq	$8, %rax
+[3,4]     .    .D=eE----------R   cmpq	%r12, %rax
+[3,5]     .    .D==eE---------R   jb	..B1.40
+
+
+Average Wait times (based on the timeline view):
+[0]: Executions
+[1]: Average time spent waiting in a scheduler's queue
+[2]: Average time spent waiting in a scheduler's queue while ready
+[3]: Average time elapsed from WB until retire stage
+
+      [0]    [1]    [2]    [3]
+0.     4     1.5    0.5    2.5       vmovups	(%r13,%rax,8), %zmm1
+1.     4     2.3    0.0    0.0       vfmadd213pd	(%rcx,%rax,8), %zmm2, %zmm1
+2.     4     13.0   0.0    0.0       vmovupd	%zmm1, (%r14,%rax,8)
+3.     4     1.0    0.8    11.5      addq	$8, %rax
+4.     4     2.0    0.0    10.5      cmpq	%r12, %rax
+5.     4     2.8    0.0    9.5       jb	..B1.40

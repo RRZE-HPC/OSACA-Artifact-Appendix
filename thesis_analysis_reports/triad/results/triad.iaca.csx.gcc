@@ -1,0 +1,59 @@
+Intel(R) Architecture Code Analyzer Version -  v3.0-28-g1ba2cbb build date: 2017-10-23;16:42:45
+Analyzed File -  triad.s.csx.gcc.o
+Binary Format - 64Bit
+Architecture  -  SKX
+Analysis Type - Throughput
+
+Throughput Analysis Report
+--------------------------
+Block Throughput: 12.00 Cycles       Throughput Bottleneck: Backend
+Loop Count:  22
+Port Binding In Cycles Per Iteration:
+--------------------------------------------------------------------------------------------------
+|  Port  |   0   -  DV   |   1   |   2   -  D    |   3   -  D    |   4   |   5   |   6   |   7   |
+--------------------------------------------------------------------------------------------------
+| Cycles |  4.0     0.0  |  4.0  | 12.0     8.0  | 12.0     8.0  |  8.0  |  0.5  |  0.5  |  0.0  |
+--------------------------------------------------------------------------------------------------
+
+DV - Divider pipe (on port 0)
+D - Data fetch pipe (on ports 2 and 3)
+F - Macro Fusion with the previous instruction occurred
+* - instruction micro-ops not bound to a port
+^ - Micro Fusion occurred
+# - ESP Tracking sync uop was issued
+@ - SSE instruction followed an AVX256/AVX512 instruction, dozens of cycles penalty is expected
+X - instruction not supported, was not accounted in Analysis
+
+| Num Of   |                    Ports pressure in cycles                         |      |
+|  Uops    |  0  - DV    |  1   |  2  -  D    |  3  -  D    |  4   |  5   |  6   |  7   |
+-----------------------------------------------------------------------------------------
+|   1      |             |      | 1.0     1.0 |             |      |      |      |      | vmovupd ymm14, ymmword ptr [r14+rsi*1]
+|   1      |             |      |             | 1.0     1.0 |      |      |      |      | vmovupd ymm15, ymmword ptr [r14+rsi*1+0x20]
+|   1      |             |      | 1.0     1.0 |             |      |      |      |      | vmovupd ymm1, ymmword ptr [r14+rsi*1+0x40]
+|   1      |             |      |             | 1.0     1.0 |      |      |      |      | vmovupd ymm0, ymmword ptr [r14+rsi*1+0x60]
+|   1      |             |      | 1.0     1.0 |             |      |      |      |      | vmovupd ymm3, ymmword ptr [r14+rsi*1+0x80]
+|   1      |             |      |             | 1.0     1.0 |      |      |      |      | vmovupd ymm4, ymmword ptr [r14+rsi*1+0xa0]
+|   1      |             |      | 1.0     1.0 |             |      |      |      |      | vmovupd ymm5, ymmword ptr [r14+rsi*1+0xc0]
+|   1      |             |      |             | 1.0     1.0 |      |      |      |      | vmovupd ymm7, ymmword ptr [r14+rsi*1+0xe0]
+|   2      | 1.0         |      | 1.0     1.0 |             |      |      |      |      | vfmadd213pd ymm14, ymm6, ymmword ptr [r13+rsi*1]
+|   2      |             | 1.0  |             | 1.0     1.0 |      |      |      |      | vfmadd213pd ymm15, ymm6, ymmword ptr [r13+rsi*1+0x20]
+|   2      | 1.0         |      | 1.0     1.0 |             |      |      |      |      | vfmadd213pd ymm1, ymm6, ymmword ptr [r13+rsi*1+0x40]
+|   2      |             | 1.0  |             | 1.0     1.0 |      |      |      |      | vfmadd213pd ymm0, ymm6, ymmword ptr [r13+rsi*1+0x60]
+|   2      | 1.0         |      | 1.0     1.0 |             |      |      |      |      | vfmadd213pd ymm3, ymm6, ymmword ptr [r13+rsi*1+0x80]
+|   2      |             | 1.0  |             | 1.0     1.0 |      |      |      |      | vfmadd213pd ymm4, ymm6, ymmword ptr [r13+rsi*1+0xa0]
+|   2      | 1.0         |      | 1.0     1.0 |             |      |      |      |      | vfmadd213pd ymm5, ymm6, ymmword ptr [r13+rsi*1+0xc0]
+|   2      |             | 1.0  |             | 1.0     1.0 |      |      |      |      | vfmadd213pd ymm7, ymm6, ymmword ptr [r13+rsi*1+0xe0]
+|   2      |             |      | 1.0         |             | 1.0  |      |      |      | vmovupd ymmword ptr [r12+rsi*1], ymm14
+|   2      |             |      |             | 1.0         | 1.0  |      |      |      | vmovupd ymmword ptr [r12+rsi*1+0x20], ymm15
+|   2      |             |      | 1.0         |             | 1.0  |      |      |      | vmovupd ymmword ptr [r12+rsi*1+0x40], ymm1
+|   2      |             |      |             | 1.0         | 1.0  |      |      |      | vmovupd ymmword ptr [r12+rsi*1+0x60], ymm0
+|   2      |             |      | 1.0         |             | 1.0  |      |      |      | vmovupd ymmword ptr [r12+rsi*1+0x80], ymm3
+|   2      |             |      |             | 1.0         | 1.0  |      |      |      | vmovupd ymmword ptr [r12+rsi*1+0xa0], ymm4
+|   2      |             |      | 1.0         |             | 1.0  |      |      |      | vmovupd ymmword ptr [r12+rsi*1+0xc0], ymm5
+|   2      |             |      |             | 1.0         | 1.0  |      |      |      | vmovupd ymmword ptr [r12+rsi*1+0xe0], ymm7
+|   1      |             |      |             |             |      | 0.5  | 0.5  |      | add rsi, 0x100
+|   1*     |             |      |             |             |      |      |      |      | cmp rcx, rsi
+|   0*F    |             |      |             |             |      |      |      |      | jnz 0xffffffffffffff2c
+Total Num Of Uops: 42
+Analysis Notes:
+Backend allocation was stalled due to unavailable allocation resources.

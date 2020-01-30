@@ -1,0 +1,35 @@
+Open Source Architecture Code Analyzer (OSACA) - v0.3
+Analyzed file:      sum_reduction.s.csx.icc.s
+Architecture:       csx
+Timestamp:          2020-01-28 09:08:51
+
+ P - Throughput of LOAD operation can be hidden behind a past or future STORE instruction
+ * - Instruction micro-ops not bound to a port
+ X - No throughput/latency information for this instruction in data file
+
+
+Combined Analysis Report
+------------------------
+                                     Port pressure in cycles                                     
+     |  0   - 0DV  |  1   |  2   -  2D  |  3   -  3D  |  4   |  5   |  6   |  7   ||  CP  | LCD  |
+-------------------------------------------------------------------------------------------------
+ 392 |             |      |             |             |      |      |      |      ||      |      |   ..B1.38:                        # Preds ..B1.38 ..B1.37
+ 393 |             |      |             |             |      |      |      |      ||      |      |   # Execution count [2.22e+03]
+ 394 | 0.50        |      | 0.50   0.50 | 0.50   0.50 |      | 0.50 |      |      ||      |  4.0 |   vaddpd    (%r13,%rax,8), %zmm4, %zmm4                   #76.5
+ 395 | 0.50        |      | 0.50   0.50 | 0.50   0.50 |      | 0.50 |      |      ||      |      |   vaddpd    64(%r13,%rax,8), %zmm3, %zmm3                 #76.5
+ 396 | 0.50        |      | 0.50   0.50 | 0.50   0.50 |      | 0.50 |      |      ||      |      |   vaddpd    128(%r13,%rax,8), %zmm2, %zmm2                #76.5
+ 397 | 0.50        |      | 0.50   0.50 | 0.50   0.50 |      | 0.50 |      |      ||  8.0 |      |   vaddpd    192(%r13,%rax,8), %zmm1, %zmm1                #76.5
+ 398 | 0.00        | 0.50 |             |             |      | 0.00 | 0.50 |      ||      |      |   addq      $32, %rax                                     #76.5
+ 399 | 0.00        | 0.50 |             |             |      | 0.00 | 0.50 |      ||      |      |   cmpq      %r14, %rax                                    #76.5
+ 400 |             |      |             |             |      |      |      |      ||      |      | * jb        ..B1.38       # Prob 82%                      #76.5
+
+       2.00          1.00   2.00   2.00   2.00   2.00          2.00   1.00           8.0    4.0  
+
+
+Loop-Carried Dependencies Analysis Report
+-----------------------------------------
+ 394 |  4.0 | vaddpd    (%r13,%rax,8), %zmm4, %zmm4                   #76.5| [394]
+ 395 |  4.0 | vaddpd    64(%r13,%rax,8), %zmm3, %zmm3                 #76.5| [395]
+ 396 |  4.0 | vaddpd    128(%r13,%rax,8), %zmm2, %zmm2                #76.5| [396]
+ 397 |  4.0 | vaddpd    192(%r13,%rax,8), %zmm1, %zmm1                #76.5| [397]
+ 399 |  2.0 | cmpq      %r14, %rax                                    #76.5| [398, 399]

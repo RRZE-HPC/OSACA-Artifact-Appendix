@@ -1,0 +1,44 @@
+Open Source Architecture Code Analyzer (OSACA) - v0.3
+Analyzed file:      copy.s.csx.gcc.s
+Architecture:       csx
+Timestamp:          2020-01-28 11:50:00
+
+ P - Throughput of LOAD operation can be hidden behind a past or future STORE instruction
+ * - Instruction micro-ops not bound to a port
+ X - No throughput/latency information for this instruction in data file
+
+
+Combined Analysis Report
+------------------------
+                                     Port pressure in cycles                                     
+     |  0   - 0DV  |  1   |  2   -  2D  |  3   -  3D  |  4   |  5   |  6   |  7   ||  CP  | LCD  |
+-------------------------------------------------------------------------------------------------
+ 311 |             |      |             |             |      |      |      |      ||      |      |   # LLVM-MCA-BEGIN
+ 312 |             |      |             |             |      |      |      |      ||      |      |   .L19:
+ 313 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   vmovupd	(%r12,%rcx), %ymm10
+ 314 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   vmovupd	32(%r12,%rcx), %ymm11
+ 315 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   vmovupd	64(%r12,%rcx), %ymm12
+ 316 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   vmovupd	96(%r12,%rcx), %ymm13
+ 317 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   vmovupd	128(%r12,%rcx), %ymm14
+ 318 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   vmovupd	160(%r12,%rcx), %ymm15
+ 319 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   vmovupd	192(%r12,%rcx), %ymm0
+ 320 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||  4.0 |      |   vmovupd	224(%r12,%rcx), %ymm1
+ 321 |             |      | 0.50        | 0.50        | 1.00 |      |      |      ||      |      |   vmovupd	%ymm10, 0(%r13,%rcx)
+ 322 |             |      | 0.50        | 0.50        | 1.00 |      |      |      ||      |      |   vmovupd	%ymm11, 32(%r13,%rcx)
+ 323 |             |      | 0.50        | 0.50        | 1.00 |      |      |      ||      |      |   vmovupd	%ymm12, 64(%r13,%rcx)
+ 324 |             |      | 0.50        | 0.50        | 1.00 |      |      |      ||      |      |   vmovupd	%ymm13, 96(%r13,%rcx)
+ 325 |             |      | 0.50        | 0.50        | 1.00 |      |      |      ||      |      |   vmovupd	%ymm14, 128(%r13,%rcx)
+ 326 |             |      | 0.50        | 0.50        | 1.00 |      |      |      ||      |      |   vmovupd	%ymm15, 160(%r13,%rcx)
+ 327 |             |      | 0.50        | 0.50        | 1.00 |      |      |      ||      |      |   vmovupd	%ymm0, 192(%r13,%rcx)
+ 328 |             |      | 0.50        | 0.50        | 1.00 |      |      |      ||  0.0 |      |   vmovupd	%ymm1, 224(%r13,%rcx)
+ 329 | 0.25        | 0.25 |             |             |      | 0.25 | 0.25 |      ||      |  1.0 |   addq	$256, %rcx
+ 330 | 0.25        | 0.25 |             |             |      | 0.25 | 0.25 |      ||      |      |   cmpq	%rcx, %r10
+ 331 |             |      |             |             |      |      |      |      ||      |      | * jne	.L19
+ 332 |             |      |             |             |      |      |      |      ||      |      |   # LLVM-MCA-END
+
+       0.50          0.50   8.00   4.00   8.00   4.00   8.00   0.50   0.50            4     1.0  
+
+
+Loop-Carried Dependencies Analysis Report
+-----------------------------------------
+ 329 |  1.0 | addq	$256, %rcx                     | [329]

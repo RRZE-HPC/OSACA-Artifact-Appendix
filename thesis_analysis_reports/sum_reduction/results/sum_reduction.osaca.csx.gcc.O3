@@ -1,0 +1,59 @@
+Open Source Architecture Code Analyzer (OSACA) - v0.3
+Analyzed file:      sum_reduction.s.csx.gcc.O3.s
+Architecture:       csx
+Timestamp:          2020-01-28 09:16:07
+
+ P - Throughput of LOAD operation can be hidden behind a past or future STORE instruction
+ * - Instruction micro-ops not bound to a port
+ X - No throughput/latency information for this instruction in data file
+
+
+Combined Analysis Report
+------------------------
+                                     Port pressure in cycles                                     
+     |  0   - 0DV  |  1   |  2   -  2D  |  3   -  3D  |  4   |  5   |  6   |  7   ||  CP  | LCD  |
+-------------------------------------------------------------------------------------------------
+ 305 |             |      |             |             |      |      |      |      ||      |      |   .L19:
+ 306 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||  4.0 |      |   vmovupd	(%rcx), %ymm4
+ 307 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   vmovupd	32(%rcx), %ymm13
+ 308 | 0.50        | 0.50 |             |             |      |      |      |      ||  4.0 |  4.0 |   vaddsd	%xmm4, %xmm0, %xmm6
+ 309 |             |      |             |             |      | 1.00 |      |      ||      |      |   vunpckhpd	%xmm4, %xmm4, %xmm3
+ 310 |             |      |             |             |      | 1.00 |      |      ||      |      |   vextractf64x2	$0x1, %ymm4, %xmm8
+ 311 | 0.50        | 0.50 |             |             |      |      |      |      ||  4.0 |  4.0 |   vaddsd	%xmm6, %xmm3, %xmm7
+ 312 |             |      |             |             |      | 1.00 |      |      ||      |      |   vunpckhpd	%xmm8, %xmm8, %xmm11
+ 313 |             |      |             |             |      | 1.00 |      |      ||      |      |   vunpckhpd	%xmm13, %xmm13, %xmm1
+ 314 | 0.50        | 0.50 |             |             |      |      |      |      ||  4.0 |  4.0 |   vaddsd	%xmm7, %xmm8, %xmm10
+ 315 |             |      |             |             |      | 1.00 |      |      ||      |      |   vextractf64x2	$0x1, %ymm13, %xmm2
+ 316 |             |      |             |             |      | 1.00 |      |      ||      |      |   vunpckhpd	%xmm2, %xmm2, %xmm3
+ 317 | 0.50        | 0.50 |             |             |      |      |      |      ||  4.0 |  4.0 |   vaddsd	%xmm11, %xmm10, %xmm12
+ 318 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   vmovupd	64(%rcx), %ymm8
+ 319 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   vmovupd	96(%rcx), %ymm5
+ 320 | 0.50        | 0.50 |             |             |      |      |      |      ||  4.0 |  4.0 |   vaddsd	%xmm13, %xmm12, %xmm0
+ 321 |             |      |             |             |      | 1.00 |      |      ||      |      |   vunpckhpd	%xmm8, %xmm8, %xmm12
+ 322 |             |      |             |             |      | 1.00 |      |      ||      |      |   vextractf64x2	$0x1, %ymm8, %xmm14
+ 323 | 0.50        | 0.50 |             |             |      |      |      |      ||  4.0 |  4.0 |   vaddsd	%xmm0, %xmm1, %xmm4
+ 324 |             |      |             |             |      | 1.00 |      |      ||      |      |   vunpckhpd	%xmm14, %xmm14, %xmm0
+ 325 |             |      |             |             |      | 1.00 |      |      ||      |      |   vextractf64x2	$0x1, %ymm5, %xmm9
+ 326 | 0.50        | 0.50 |             |             |      |      |      |      ||  4.0 |  4.0 |   vaddsd	%xmm4, %xmm2, %xmm6
+ 327 | 0.00        | 0.00 |             |             |      | 0.00 | 1.00 |      ||      |      |   subq	$-128, %rcx
+ 328 | 0.50        | 0.50 |             |             |      |      |      |      ||  4.0 |  4.0 |   vaddsd	%xmm3, %xmm6, %xmm7
+ 329 | 0.50        | 0.50 |             |             |      |      |      |      ||  4.0 |  4.0 |   vaddsd	%xmm8, %xmm7, %xmm11
+ 330 |             |      |             |             |      | 1.00 |      |      ||      |      |   vunpckhpd	%xmm5, %xmm5, %xmm7
+ 331 | 0.50        | 0.50 |             |             |      |      |      |      ||  4.0 |  4.0 |   vaddsd	%xmm11, %xmm12, %xmm13
+ 332 |             |      |             |             |      | 1.00 |      |      ||      |      |   vunpckhpd	%xmm9, %xmm9, %xmm12
+ 333 | 0.50        | 0.50 |             |             |      |      |      |      ||  4.0 |  4.0 |   vaddsd	%xmm13, %xmm14, %xmm1
+ 334 | 0.50        | 0.50 |             |             |      |      |      |      ||  4.0 |  4.0 |   vaddsd	%xmm0, %xmm1, %xmm4
+ 335 | 0.50        | 0.50 |             |             |      |      |      |      ||  4.0 |  4.0 |   vaddsd	%xmm5, %xmm4, %xmm3
+ 336 | 0.50        | 0.50 |             |             |      |      |      |      ||  4.0 |  4.0 |   vaddsd	%xmm3, %xmm7, %xmm8
+ 337 | 0.50        | 0.50 |             |             |      |      |      |      ||  4.0 |  4.0 |   vaddsd	%xmm8, %xmm9, %xmm11
+ 338 | 0.50        | 0.50 |             |             |      |      |      |      ||  4.0 |  4.0 |   vaddsd	%xmm12, %xmm11, %xmm0
+ 339 | 0.00        | 0.00 |             |             |      | 0.00 | 1.00 |      ||      |      |   cmpq	%rcx, %r15
+ 340 |             |      |             |             |      |      |      |      ||      |      | * jne	.L19
+
+       8.00          8.00   2.00   2.00   2.00   2.00          12.0   2.00           68.0   64.0 
+
+
+Loop-Carried Dependencies Analysis Report
+-----------------------------------------
+ 327 |  1.0 | subq	$-128, %rcx                    | [327]
+ 338 | 64.0 | vaddsd	%xmm12, %xmm11, %xmm0        | [308, 311, 314, 317, 320, 323, 326, 328, 329, 331, 333, 334, 335, 336, 337, 338]

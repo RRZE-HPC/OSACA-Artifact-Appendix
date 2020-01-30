@@ -1,0 +1,36 @@
+Open Source Architecture Code Analyzer (OSACA) - v0.3
+Analyzed file:      update.s.tx2.clang.s
+Architecture:       tx2
+Timestamp:          2020-01-22 17:15:22
+
+ P - Throughput of LOAD operation can be hidden behind a past or future STORE instruction
+ * - Instruction micro-ops not bound to a port
+ X - No throughput/latency information for this instruction in data file
+
+
+Combined Analysis Report
+------------------------
+                          Port pressure in cycles                           
+     |  0   - 0DV  |  1   - 1DV  |  2   |  3   |  4   |  5   ||  CP  | LCD  |
+----------------------------------------------------------------------------
+ 384 |             |             |      |      |      |      ||      |      |   .LBB1_32:                               //   Parent Loop BB1_20 Depth=1
+ 385 |             |             |      |      |      |      ||      |      |   //     Parent Loop BB1_22 Depth=2
+ 386 |             |             |      |      |      |      ||      |      |   // =>    This Inner Loop Header: Depth=3
+ 387 |             |             |      | 1.00 | 1.00 |      ||      |      |   ldp	q0, q1, [x8]
+ 388 |             |             |      | 1.00 | 1.00 |      ||  4.0 |      |   ldp	q2, q3, [x8, #-32]
+ 389 | 0.50        | 0.50        |      |      |      |      ||  6.0 |      |   fmul	v2.2d, v2.2d, v26.2d
+ 390 | 0.50        | 0.50        |      |      |      |      ||      |      |   fmul	v3.2d, v3.2d, v26.2d
+ 391 |             |             |      | 1.00 | 1.00 | 2.00 ||  0.0 |      |   stp	q2, q3, [x8, #-32]
+ 392 | 0.50        | 0.50        |      |      |      |      ||      |      |   fmul	v0.2d, v0.2d, v26.2d
+ 393 | 0.50        | 0.50        |      |      |      |      ||      |      |   fmul	v1.2d, v1.2d, v26.2d
+ 394 |             |             |      | 1.00 | 1.00 | 2.00 ||      |      |   stp	q0, q1, [x8], #64
+ 395 | 0.00        | 0.00        | 1.00 |      |      |      ||      |  1.0 |   adds	x9, x9, #1              // =1
+ 396 |             |             |      |      |      |      ||      |      | * b.ne	.LBB1_32
+
+       2.00          2.00          1.00   4.00   4.00   4.00    10.0   1.0  
+
+
+Loop-Carried Dependencies Analysis Report
+-----------------------------------------
+ 394 |  0.0 | stp	q0, q1, [x8], #64               | [394]
+ 395 |  1.0 | adds	x9, x9, #1              // =1  | [395]

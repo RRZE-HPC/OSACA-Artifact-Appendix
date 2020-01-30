@@ -1,0 +1,67 @@
+Intel(R) Architecture Code Analyzer Version -  v3.0-28-g1ba2cbb build date: 2017-10-23;16:42:45
+Analyzed File -  sum_reduction.s.csx.gcc.O3.o
+Binary Format - 64Bit
+Architecture  -  SKX
+Analysis Type - Throughput
+
+Throughput Analysis Report
+--------------------------
+Block Throughput: 64.00 Cycles       Throughput Bottleneck: Backend
+Loop Count:  22
+Port Binding In Cycles Per Iteration:
+--------------------------------------------------------------------------------------------------
+|  Port  |   0   -  DV   |   1   |   2   -  D    |   3   -  D    |   4   |   5   |   6   |   7   |
+--------------------------------------------------------------------------------------------------
+| Cycles |  8.0     0.0  |  8.0  |  2.0     2.0  |  2.0     2.0  |  0.0  | 12.0  |  1.0  |  0.0  |
+--------------------------------------------------------------------------------------------------
+
+DV - Divider pipe (on port 0)
+D - Data fetch pipe (on ports 2 and 3)
+F - Macro Fusion with the previous instruction occurred
+* - instruction micro-ops not bound to a port
+^ - Micro Fusion occurred
+# - ESP Tracking sync uop was issued
+@ - SSE instruction followed an AVX256/AVX512 instruction, dozens of cycles penalty is expected
+X - instruction not supported, was not accounted in Analysis
+
+| Num Of   |                    Ports pressure in cycles                         |      |
+|  Uops    |  0  - DV    |  1   |  2  -  D    |  3  -  D    |  4   |  5   |  6   |  7   |
+-----------------------------------------------------------------------------------------
+|   1      |             |      | 1.0     1.0 |             |      |      |      |      | vmovupd ymm4, ymmword ptr [rcx]
+|   1      |             |      |             | 1.0     1.0 |      |      |      |      | vmovupd ymm13, ymmword ptr [rcx+0x20]
+|   1      | 1.0         |      |             |             |      |      |      |      | vaddsd xmm6, xmm0, xmm4
+|   1      |             |      |             |             |      | 1.0  |      |      | vunpckhpd xmm3, xmm4, xmm4
+|   1      |             |      |             |             |      | 1.0  |      |      | vextractf64x2 xmm8, ymm4, 0x1
+|   1      |             | 1.0  |             |             |      |      |      |      | vaddsd xmm7, xmm3, xmm6
+|   1      |             |      |             |             |      | 1.0  |      |      | vunpckhpd xmm11, xmm8, xmm8
+|   1      |             |      |             |             |      | 1.0  |      |      | vunpckhpd xmm1, xmm13, xmm13
+|   1      | 1.0         |      |             |             |      |      |      |      | vaddsd xmm10, xmm8, xmm7
+|   1      |             |      |             |             |      | 1.0  |      |      | vextractf64x2 xmm2, ymm13, 0x1
+|   1      |             |      |             |             |      | 1.0  |      |      | vunpckhpd xmm3, xmm2, xmm2
+|   1      |             | 1.0  |             |             |      |      |      |      | vaddsd xmm12, xmm10, xmm11
+|   1      |             |      | 1.0     1.0 |             |      |      |      |      | vmovupd ymm8, ymmword ptr [rcx+0x40]
+|   1      |             |      |             | 1.0     1.0 |      |      |      |      | vmovupd ymm5, ymmword ptr [rcx+0x60]
+|   1      | 1.0         |      |             |             |      |      |      |      | vaddsd xmm0, xmm12, xmm13
+|   1      |             |      |             |             |      | 1.0  |      |      | vunpckhpd xmm12, xmm8, xmm8
+|   1      |             |      |             |             |      | 1.0  |      |      | vextractf64x2 xmm14, ymm8, 0x1
+|   1      |             | 1.0  |             |             |      |      |      |      | vaddsd xmm4, xmm1, xmm0
+|   1      |             |      |             |             |      | 1.0  |      |      | vunpckhpd xmm0, xmm14, xmm14
+|   1      |             |      |             |             |      | 1.0  |      |      | vextractf64x2 xmm9, ymm5, 0x1
+|   1      | 1.0         |      |             |             |      |      |      |      | vaddsd xmm6, xmm2, xmm4
+|   1      |             |      |             |             |      |      | 1.0  |      | sub rcx, 0xffffffffffffff80
+|   1      |             | 1.0  |             |             |      |      |      |      | vaddsd xmm7, xmm6, xmm3
+|   1      | 1.0         |      |             |             |      |      |      |      | vaddsd xmm11, xmm7, xmm8
+|   1      |             |      |             |             |      | 1.0  |      |      | vunpckhpd xmm7, xmm5, xmm5
+|   1      |             | 1.0  |             |             |      |      |      |      | vaddsd xmm13, xmm12, xmm11
+|   1      |             |      |             |             |      | 1.0  |      |      | vunpckhpd xmm12, xmm9, xmm9
+|   1      | 1.0         |      |             |             |      |      |      |      | vaddsd xmm1, xmm14, xmm13
+|   1      |             | 1.0  |             |             |      |      |      |      | vaddsd xmm4, xmm1, xmm0
+|   1      | 1.0         |      |             |             |      |      |      |      | vaddsd xmm3, xmm4, xmm5
+|   1      |             | 1.0  |             |             |      |      |      |      | vaddsd xmm8, xmm7, xmm3
+|   1      | 1.0         |      |             |             |      |      |      |      | vaddsd xmm11, xmm9, xmm8
+|   1      |             | 1.0  |             |             |      |      |      |      | vaddsd xmm0, xmm11, xmm12
+|   1*     |             |      |             |             |      |      |      |      | cmp r15, rcx
+|   0*F    |             |      |             |             |      |      |      |      | jnz 0xffffffffffffff5e
+Total Num Of Uops: 34
+Analysis Notes:
+Backend allocation was stalled due to unavailable allocation resources.

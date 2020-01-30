@@ -1,0 +1,50 @@
+Open Source Architecture Code Analyzer (OSACA) - v0.3
+Analyzed file:      daxpy.s.zen.gcc.s
+Architecture:       zen1
+Timestamp:          2020-01-22 18:35:44
+
+ P - Throughput of LOAD operation can be hidden behind a past or future STORE instruction
+ * - Instruction micro-ops not bound to a port
+ X - No throughput/latency information for this instruction in data file
+
+
+Combined Analysis Report
+------------------------
+                                               Port pressure in cycles                                                
+     |  0   |  1   |  2   |  3   - 3DV  |  4   |  5   |  6   |  7   |  8   |  9   |  8D  |  9D  |  ST  ||  CP  | LCD  |
+----------------------------------------------------------------------------------------------------------------------
+ 322 |      |      |      |             |      |      |      |      |      |      |      |      |      ||      |      |   .L19:
+ 323 |      |      |      |             |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||      |      |   vmovups	(%r12,%rax), %xmm12
+ 324 |      |      |      |             |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||      |      |   vmovups	16(%r12,%rax), %xmm13
+ 325 |      |      |      |             |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||      |      |   vmovups	32(%r12,%rax), %xmm14
+ 326 |      |      |      |             |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||      |      |   vmovups	48(%r12,%rax), %xmm15
+ 327 |      |      |      |             |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||      |      |   vmovups	64(%r12,%rax), %xmm1
+ 328 |      |      |      |             |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||      |      |   vmovups	80(%r12,%rax), %xmm0
+ 329 |      |      |      |             |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||      |      |   vmovups	96(%r12,%rax), %xmm4
+ 330 |      |      |      |             |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||  4.0 |      |   vmovups	112(%r12,%rax), %xmm5
+ 331 | 1.00 | 1.00 |      |             |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||      |      |   vfmadd213pd	0(%rbp,%rax), %xmm3, %xmm12
+ 332 | 1.00 | 1.00 |      |             |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||      |      |   vfmadd213pd	16(%rbp,%rax), %xmm3, %xmm13
+ 333 | 1.00 | 1.00 |      |             |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||      |      |   vfmadd213pd	32(%rbp,%rax), %xmm3, %xmm14
+ 334 | 1.00 | 1.00 |      |             |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||      |      |   vfmadd213pd	48(%rbp,%rax), %xmm3, %xmm15
+ 335 | 1.00 | 1.00 |      |             |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||      |      |   vfmadd213pd	64(%rbp,%rax), %xmm3, %xmm1
+ 336 | 1.00 | 1.00 |      |             |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||      |      |   vfmadd213pd	80(%rbp,%rax), %xmm3, %xmm0
+ 337 | 1.00 | 1.00 |      |             |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||      |      |   vfmadd213pd	96(%rbp,%rax), %xmm3, %xmm4
+ 338 | 1.00 | 1.00 |      |             |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||  4.0 |      |   vfmadd213pd	112(%rbp,%rax), %xmm3, %xmm5
+ 339 |      |      |      |             |      |      |      |      | 0.50 | 0.50 |      |      | 1.00 ||      |      |   vmovups	%xmm12, 0(%rbp,%rax)
+ 340 |      |      |      |             |      |      |      |      | 0.50 | 0.50 |      |      | 1.00 ||      |      |   vmovups	%xmm13, 16(%rbp,%rax)
+ 341 |      |      |      |             |      |      |      |      | 0.50 | 0.50 |      |      | 1.00 ||      |      |   vmovups	%xmm14, 32(%rbp,%rax)
+ 342 |      |      |      |             |      |      |      |      | 0.50 | 0.50 |      |      | 1.00 ||      |      |   vmovups	%xmm15, 48(%rbp,%rax)
+ 343 |      |      |      |             |      |      |      |      | 0.50 | 0.50 |      |      | 1.00 ||      |      |   vmovups	%xmm1, 64(%rbp,%rax)
+ 344 |      |      |      |             |      |      |      |      | 0.50 | 0.50 |      |      | 1.00 ||      |      |   vmovups	%xmm0, 80(%rbp,%rax)
+ 345 |      |      |      |             |      |      |      |      | 0.50 | 0.50 |      |      | 1.00 ||      |      |   vmovups	%xmm4, 96(%rbp,%rax)
+ 346 |      |      |      |             |      |      |      |      | 0.50 | 0.50 |      |      | 1.00 ||  0.0 |      |   vmovups	%xmm5, 112(%rbp,%rax)
+ 347 |      |      |      |             | 0.25 | 0.25 | 0.25 | 0.25 |      |      |      |      |      ||      |  1.0 |   subq	$-128, %rax
+ 348 |      |      |      |             | 0.25 | 0.25 | 0.25 | 0.25 |      |      |      |      |      ||      |      |   cmpq	%r15, %rax
+ 349 |      |      |      |             |      |      |      |      |      |      |      |      |      ||      |      | * jne	.L19
+
+       8.00   8.00                        0.50   0.50   0.50   0.50   12.0   12.0   8.00   8.00   8.00    8.0    1.0  
+
+
+Loop-Carried Dependencies Analysis Report
+-----------------------------------------
+ 347 |  1.0 | subq	$-128, %rax                    | [347]

@@ -1,0 +1,61 @@
+Intel(R) Architecture Code Analyzer Version -  v3.0-28-g1ba2cbb build date: 2017-10-23;16:42:45
+Analyzed File -  j2d.s.csx.gcc.o
+Binary Format - 64Bit
+Architecture  -  SKX
+Analysis Type - Throughput
+
+Throughput Analysis Report
+--------------------------
+Block Throughput: 10.47 Cycles       Throughput Bottleneck: Dependency chains
+Loop Count:  22
+Port Binding In Cycles Per Iteration:
+--------------------------------------------------------------------------------------------------
+|  Port  |   0   -  DV   |   1   |   2   -  D    |   3   -  D    |   4   |   5   |   6   |   7   |
+--------------------------------------------------------------------------------------------------
+| Cycles |  8.0     0.0  |  8.0  | 10.0     9.0  | 10.0     7.0  |  4.0  |  0.5  |  0.5  |  0.0  |
+--------------------------------------------------------------------------------------------------
+
+DV - Divider pipe (on port 0)
+D - Data fetch pipe (on ports 2 and 3)
+F - Macro Fusion with the previous instruction occurred
+* - instruction micro-ops not bound to a port
+^ - Micro Fusion occurred
+# - ESP Tracking sync uop was issued
+@ - SSE instruction followed an AVX256/AVX512 instruction, dozens of cycles penalty is expected
+X - instruction not supported, was not accounted in Analysis
+
+| Num Of   |                    Ports pressure in cycles                         |      |
+|  Uops    |  0  - DV    |  1   |  2  -  D    |  3  -  D    |  4   |  5   |  6   |  7   |
+-----------------------------------------------------------------------------------------
+|   1      |             |      | 1.0     1.0 |             |      |      |      |      | vmovupd ymm11, ymmword ptr [r8+rax*1]
+|   1      |             |      |             | 1.0     1.0 |      |      |      |      | vmovupd ymm13, ymmword ptr [rsi+rax*1]
+|   2      | 1.0         |      | 1.0     1.0 |             |      |      |      |      | vaddpd ymm12, ymm11, ymmword ptr [r9+rax*1]
+|   2      |             | 1.0  |             | 1.0     1.0 |      |      |      |      | vaddpd ymm14, ymm13, ymmword ptr [rdi+rax*1]
+|   1      |             |      | 1.0     1.0 |             |      |      |      |      | vmovupd ymm1, ymmword ptr [r8+rax*1+0x20]
+|   1      |             |      |             | 1.0     1.0 |      |      |      |      | vmovupd ymm2, ymmword ptr [rsi+rax*1+0x20]
+|   1      | 1.0         |      |             |             |      |      |      |      | vaddpd ymm15, ymm12, ymm14
+|   2      |             | 1.0  | 1.0     1.0 |             |      |      |      |      | vaddpd ymm5, ymm1, ymmword ptr [r9+rax*1+0x20]
+|   2      | 1.0         |      |             | 1.0     1.0 |      |      |      |      | vaddpd ymm7, ymm2, ymmword ptr [rdi+rax*1+0x20]
+|   1      |             | 1.0  |             |             |      |      |      |      | vmulpd ymm0, ymm15, ymm8
+|   1      |             |      | 1.0     1.0 |             |      |      |      |      | vmovupd ymm10, ymmword ptr [r8+rax*1+0x40]
+|   1      | 1.0         |      |             |             |      |      |      |      | vaddpd ymm6, ymm5, ymm7
+|   1      |             |      |             | 1.0     1.0 |      |      |      |      | vmovupd ymm12, ymmword ptr [rsi+rax*1+0x40]
+|   1      |             |      | 1.0     1.0 |             |      |      |      |      | vmovupd ymm5, ymmword ptr [rsi+rax*1+0x60]
+|   2      |             |      |             | 1.0         | 1.0  |      |      |      | vmovupd ymmword ptr [rdx+rax*1], ymm0
+|   1      |             |      | 1.0     1.0 |             |      |      |      |      | vmovupd ymm0, ymmword ptr [r8+rax*1+0x60]
+|   2      |             | 1.0  |             | 1.0     1.0 |      |      |      |      | vaddpd ymm11, ymm10, ymmword ptr [r9+rax*1+0x40]
+|   2      | 1.0         |      | 1.0     1.0 |             |      |      |      |      | vaddpd ymm13, ymm12, ymmword ptr [rdi+rax*1+0x40]
+|   2      |             | 1.0  |             | 1.0     1.0 |      |      |      |      | vaddpd ymm1, ymm0, ymmword ptr [r9+rax*1+0x60]
+|   2      | 1.0         |      | 1.0     1.0 |             |      |      |      |      | vaddpd ymm2, ymm5, ymmword ptr [rdi+rax*1+0x60]
+|   1      |             | 1.0  |             |             |      |      |      |      | vaddpd ymm14, ymm11, ymm13
+|   1      | 1.0         |      |             |             |      |      |      |      | vmulpd ymm9, ymm6, ymm8
+|   1      |             | 1.0  |             |             |      |      |      |      | vaddpd ymm7, ymm1, ymm2
+|   1      | 1.0         |      |             |             |      |      |      |      | vmulpd ymm15, ymm14, ymm8
+|   1      |             | 1.0  |             |             |      |      |      |      | vmulpd ymm6, ymm7, ymm8
+|   2      |             |      |             | 1.0         | 1.0  |      |      |      | vmovupd ymmword ptr [rdx+rax*1+0x20], ymm9
+|   2      |             |      | 1.0         |             | 1.0  |      |      |      | vmovupd ymmword ptr [rdx+rax*1+0x40], ymm15
+|   2      |             |      |             | 1.0         | 1.0  |      |      |      | vmovupd ymmword ptr [rdx+rax*1+0x60], ymm6
+|   1      |             |      |             |             |      | 0.5  | 0.5  |      | sub rax, 0xffffffffffffff80
+|   1*     |             |      |             |             |      |      |      |      | cmp r15, rax
+|   0*F    |             |      |             |             |      |      |      |      | jnz 0xffffffffffffff58
+Total Num Of Uops: 42

@@ -1,0 +1,51 @@
+Intel(R) Architecture Code Analyzer Version -  v3.0-28-g1ba2cbb build date: 2017-10-23;16:42:45
+Analyzed File -  update.s.csx.gcc.o
+Binary Format - 64Bit
+Architecture  -  SKX
+Analysis Type - Throughput
+
+Throughput Analysis Report
+--------------------------
+Block Throughput: 8.00 Cycles       Throughput Bottleneck: Backend
+Loop Count:  22
+Port Binding In Cycles Per Iteration:
+--------------------------------------------------------------------------------------------------
+|  Port  |   0   -  DV   |   1   |   2   -  D    |   3   -  D    |   4   |   5   |   6   |   7   |
+--------------------------------------------------------------------------------------------------
+| Cycles |  4.0     0.0  |  4.0  |  5.3     4.0  |  5.4     4.0  |  8.0  |  0.5  |  0.5  |  5.3  |
+--------------------------------------------------------------------------------------------------
+
+DV - Divider pipe (on port 0)
+D - Data fetch pipe (on ports 2 and 3)
+F - Macro Fusion with the previous instruction occurred
+* - instruction micro-ops not bound to a port
+^ - Micro Fusion occurred
+# - ESP Tracking sync uop was issued
+@ - SSE instruction followed an AVX256/AVX512 instruction, dozens of cycles penalty is expected
+X - instruction not supported, was not accounted in Analysis
+
+| Num Of   |                    Ports pressure in cycles                         |      |
+|  Uops    |  0  - DV    |  1   |  2  -  D    |  3  -  D    |  4   |  5   |  6   |  7   |
+-----------------------------------------------------------------------------------------
+|   2^     | 1.0         |      | 0.6     0.6 | 0.4     0.4 |      |      |      |      | vmulpd ymm12, ymm3, ymmword ptr [rcx]
+|   2^     |             | 1.0  | 0.4     0.4 | 0.6     0.6 |      |      |      |      | vmulpd ymm13, ymm3, ymmword ptr [rcx+0x20]
+|   2^     | 1.0         |      | 0.6     0.6 | 0.4     0.4 |      |      |      |      | vmulpd ymm14, ymm3, ymmword ptr [rcx+0x40]
+|   2^     |             | 1.0  | 0.4     0.4 | 0.6     0.6 |      |      |      |      | vmulpd ymm15, ymm3, ymmword ptr [rcx+0x60]
+|   2^     | 1.0         |      | 0.6     0.6 | 0.4     0.4 |      |      |      |      | vmulpd ymm0, ymm3, ymmword ptr [rcx+0x80]
+|   2^     |             | 1.0  | 0.4     0.4 | 0.6     0.6 |      |      |      |      | vmulpd ymm1, ymm3, ymmword ptr [rcx+0xa0]
+|   2^     | 1.0         |      | 0.6     0.6 | 0.4     0.4 |      |      |      |      | vmulpd ymm7, ymm3, ymmword ptr [rcx+0xc0]
+|   2^     |             | 1.0  | 0.4     0.4 | 0.6     0.6 |      |      |      |      | vmulpd ymm4, ymm3, ymmword ptr [rcx+0xe0]
+|   2^     |             |      |             |             | 1.0  |      |      | 1.0  | vmovupd ymmword ptr [rcx], ymm12
+|   2^     |             |      |             |             | 1.0  |      |      | 1.0  | vmovupd ymmword ptr [rcx+0x20], ymm13
+|   2^     |             |      |             |             | 1.0  |      |      | 1.0  | vmovupd ymmword ptr [rcx+0x40], ymm14
+|   2^     |             |      |             |             | 1.0  |      |      | 1.0  | vmovupd ymmword ptr [rcx+0x60], ymm15
+|   2^     |             |      | 0.3         | 0.4         | 1.0  |      |      | 0.3  | vmovupd ymmword ptr [rcx+0x80], ymm0
+|   2^     |             |      | 0.3         | 0.3         | 1.0  |      |      | 0.4  | vmovupd ymmword ptr [rcx+0xa0], ymm1
+|   2^     |             |      | 0.4         | 0.3         | 1.0  |      |      | 0.3  | vmovupd ymmword ptr [rcx+0xc0], ymm7
+|   2^     |             |      | 0.3         | 0.4         | 1.0  |      |      | 0.3  | vmovupd ymmword ptr [rcx+0xe0], ymm4
+|   1      |             |      |             |             |      | 0.5  | 0.5  |      | add rcx, 0x100
+|   1*     |             |      |             |             |      |      |      |      | cmp rcx, r15
+|   0*F    |             |      |             |             |      |      |      |      | jnz 0xffffffffffffff90
+Total Num Of Uops: 34
+Analysis Notes:
+Backend allocation was stalled due to unavailable allocation resources.

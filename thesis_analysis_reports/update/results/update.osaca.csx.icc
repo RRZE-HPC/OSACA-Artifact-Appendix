@@ -1,0 +1,33 @@
+Open Source Architecture Code Analyzer (OSACA) - v0.3
+Analyzed file:      update.s.csx.icc.s
+Architecture:       csx
+Timestamp:          2020-01-28 11:55:00
+
+ P - Throughput of LOAD operation can be hidden behind a past or future STORE instruction
+ * - Instruction micro-ops not bound to a port
+ X - No throughput/latency information for this instruction in data file
+
+
+Combined Analysis Report
+------------------------
+                                     Port pressure in cycles                                     
+     |  0   - 0DV  |  1   |  2   -  2D  |  3   -  3D  |  4   |  5   |  6   |  7   ||  CP  | LCD  |
+-------------------------------------------------------------------------------------------------
+ 381 |             |      |             |             |      |      |      |      ||      |      |   # LLVM-MCA-BEGIN
+ 382 |             |      |             |             |      |      |      |      ||      |      |   ..B1.38:                        # Preds ..B1.38 ..B1.37
+ 383 |             |      |             |             |      |      |      |      ||      |      |   # Execution count [2.22e+03]
+ 384 | 0.50        |      | 0.50   0.50 | 0.50   0.50 |      | 0.50 |      |      ||      |      |   vmulpd    (%r13,%rax,8), %zmm3, %zmm1                   #75.5
+ 385 | 0.50        |      | 0.50   0.50 | 0.50   0.50 |      | 0.50 |      |      ||  8.0 |      |   vmulpd    64(%r13,%rax,8), %zmm3, %zmm2                 #75.5
+ 386 |             |      | 0.50        | 0.50        | 1.00 |      |      |      ||      |      |   vmovupd   %zmm1, (%r13,%rax,8)                          #75.5
+ 387 |             |      | 0.50        | 0.50        | 1.00 |      |      |      ||  0.0 |      |   vmovupd   %zmm2, 64(%r13,%rax,8)                        #75.5
+ 388 | 0.00        | 0.50 |             |             |      | 0.00 | 0.50 |      ||      |  1.0 |   addq      $16, %rax                                     #75.5
+ 389 | 0.00        | 0.50 |             |             |      | 0.00 | 0.50 |      ||      |      |   cmpq      %r14, %rax                                    #75.5
+ 390 |             |      |             |             |      |      |      |      ||      |      | * jb        ..B1.38       # Prob 82%                      #75.5
+ 391 |             |      |             |             |      |      |      |      ||      |      |   # LLVM-MCA-END
+
+       1.00          1.00   2.00   1.00   2.00   1.00   2.00   1.00   1.00           8.0    1.0  
+
+
+Loop-Carried Dependencies Analysis Report
+-----------------------------------------
+ 388 |  1.0 | addq      $16, %rax                                     #75.5| [388]

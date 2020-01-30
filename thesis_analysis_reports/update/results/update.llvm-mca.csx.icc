@@ -1,0 +1,108 @@
+
+[0] Code Region
+
+Iterations:        100
+Instructions:      700
+Total Cycles:      215
+Total uOps:        1100
+
+Dispatch Width:    6
+uOps Per Cycle:    5.12
+IPC:               3.26
+Block RThroughput: 2.0
+
+
+Instruction Info:
+[1]: #uOps
+[2]: Latency
+[3]: RThroughput
+[4]: MayLoad
+[5]: MayStore
+[6]: HasSideEffects (U)
+
+[1]    [2]    [3]    [4]    [5]    [6]    Instructions:
+ 2      11    0.50    *                   vmulpd	(%r13,%rax,8), %zmm3, %zmm1
+ 2      11    0.50    *                   vmulpd	64(%r13,%rax,8), %zmm3, %zmm2
+ 2      1     1.00           *            vmovupd	%zmm1, (%r13,%rax,8)
+ 2      1     1.00           *            vmovupd	%zmm2, 64(%r13,%rax,8)
+ 1      1     0.25                        addq	$16, %rax
+ 1      1     0.25                        cmpq	%r14, %rax
+ 1      1     0.50                        jb	..B1.38
+
+
+Resources:
+[0]   - SKXDivider
+[1]   - SKXFPDivider
+[2]   - SKXPort0
+[3]   - SKXPort1
+[4]   - SKXPort2
+[5]   - SKXPort3
+[6]   - SKXPort4
+[7]   - SKXPort5
+[8]   - SKXPort6
+[9]   - SKXPort7
+
+
+Resource pressure per iteration:
+[0]    [1]    [2]    [3]    [4]    [5]    [6]    [7]    [8]    [9]    
+ -      -     1.25   1.25   1.34   1.35   2.00   1.25   1.25   1.31   
+
+Resource pressure by instruction:
+[0]    [1]    [2]    [3]    [4]    [5]    [6]    [7]    [8]    [9]    Instructions:
+ -      -     0.49    -     0.85   0.15    -     0.51    -      -     vmulpd	(%r13,%rax,8), %zmm3, %zmm1
+ -      -     0.43    -     0.45   0.55    -     0.57    -      -     vmulpd	64(%r13,%rax,8), %zmm3, %zmm2
+ -      -      -      -     0.02   0.54   1.00    -      -     0.44   vmovupd	%zmm1, (%r13,%rax,8)
+ -      -      -      -     0.02   0.11   1.00    -      -     0.87   vmovupd	%zmm2, 64(%r13,%rax,8)
+ -      -      -     0.99    -      -      -      -     0.01    -     addq	$16, %rax
+ -      -     0.24   0.26    -      -      -     0.17   0.33    -     cmpq	%r14, %rax
+ -      -     0.09    -      -      -      -      -     0.91    -     jb	..B1.38
+
+
+Timeline view:
+                    0123456789   
+Index     0123456789          012
+
+[0,0]     DeeeeeeeeeeeER .    . .   vmulpd	(%r13,%rax,8), %zmm3, %zmm1
+[0,1]     DeeeeeeeeeeeER .    . .   vmulpd	64(%r13,%rax,8), %zmm3, %zmm2
+[0,2]     D===========eER.    . .   vmovupd	%zmm1, (%r13,%rax,8)
+[0,3]     .D===========eER    . .   vmovupd	%zmm2, 64(%r13,%rax,8)
+[0,4]     .DeE-----------R    . .   addq	$16, %rax
+[0,5]     .D=eE----------R    . .   cmpq	%r14, %rax
+[0,6]     .D==eE---------R    . .   jb	..B1.38
+[1,0]     . DeeeeeeeeeeeER    . .   vmulpd	(%r13,%rax,8), %zmm3, %zmm1
+[1,1]     . DeeeeeeeeeeeER    . .   vmulpd	64(%r13,%rax,8), %zmm3, %zmm2
+[1,2]     . D===========eER   . .   vmovupd	%zmm1, (%r13,%rax,8)
+[1,3]     .  D===========eER  . .   vmovupd	%zmm2, 64(%r13,%rax,8)
+[1,4]     .  DeE-----------R  . .   addq	$16, %rax
+[1,5]     .  D=eE----------R  . .   cmpq	%r14, %rax
+[1,6]     .  D==eE---------R  . .   jb	..B1.38
+[2,0]     .   DeeeeeeeeeeeER  . .   vmulpd	(%r13,%rax,8), %zmm3, %zmm1
+[2,1]     .   DeeeeeeeeeeeER  . .   vmulpd	64(%r13,%rax,8), %zmm3, %zmm2
+[2,2]     .   D===========eER . .   vmovupd	%zmm1, (%r13,%rax,8)
+[2,3]     .    D===========eER. .   vmovupd	%zmm2, 64(%r13,%rax,8)
+[2,4]     .    DeE-----------R. .   addq	$16, %rax
+[2,5]     .    D=eE----------R. .   cmpq	%r14, %rax
+[2,6]     .    D==eE---------R. .   jb	..B1.38
+[3,0]     .    .DeeeeeeeeeeeER. .   vmulpd	(%r13,%rax,8), %zmm3, %zmm1
+[3,1]     .    .D=eeeeeeeeeeeER .   vmulpd	64(%r13,%rax,8), %zmm3, %zmm2
+[3,2]     .    .D============eER.   vmovupd	%zmm1, (%r13,%rax,8)
+[3,3]     .    . D============eER   vmovupd	%zmm2, 64(%r13,%rax,8)
+[3,4]     .    . DeE------------R   addq	$16, %rax
+[3,5]     .    . D=eE-----------R   cmpq	%r14, %rax
+[3,6]     .    . D==eE----------R   jb	..B1.38
+
+
+Average Wait times (based on the timeline view):
+[0]: Executions
+[1]: Average time spent waiting in a scheduler's queue
+[2]: Average time spent waiting in a scheduler's queue while ready
+[3]: Average time elapsed from WB until retire stage
+
+      [0]    [1]    [2]    [3]
+0.     4     1.0    0.3    0.0       vmulpd	(%r13,%rax,8), %zmm3, %zmm1
+1.     4     1.3    0.5    0.0       vmulpd	64(%r13,%rax,8), %zmm3, %zmm2
+2.     4     12.3   0.0    0.0       vmovupd	%zmm1, (%r13,%rax,8)
+3.     4     12.3   0.0    0.0       vmovupd	%zmm2, 64(%r13,%rax,8)
+4.     4     1.0    1.0    11.3      addq	$16, %rax
+5.     4     2.0    0.0    10.3      cmpq	%r14, %rax
+6.     4     3.0    0.0    9.3       jb	..B1.38

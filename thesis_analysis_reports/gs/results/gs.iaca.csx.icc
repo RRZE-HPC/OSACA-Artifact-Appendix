@@ -1,0 +1,57 @@
+Intel(R) Architecture Code Analyzer Version -  v3.0-28-g1ba2cbb build date: 2017-10-23;16:42:45
+Analyzed File -  gs.s.csx.icc.o
+Binary Format - 64Bit
+Architecture  -  SKX
+Analysis Type - Throughput
+
+Throughput Analysis Report
+--------------------------
+Block Throughput: 56.00 Cycles       Throughput Bottleneck: Backend
+Loop Count:  22
+Port Binding In Cycles Per Iteration:
+--------------------------------------------------------------------------------------------------
+|  Port  |   0   -  DV   |   1   |   2   -  D    |   3   -  D    |   4   |   5   |   6   |   7   |
+--------------------------------------------------------------------------------------------------
+| Cycles |  8.0     0.0  |  8.0  |  8.0     8.0  |  8.0     4.0  |  4.0  |  1.0  |  1.0  |  0.0  |
+--------------------------------------------------------------------------------------------------
+
+DV - Divider pipe (on port 0)
+D - Data fetch pipe (on ports 2 and 3)
+F - Macro Fusion with the previous instruction occurred
+* - instruction micro-ops not bound to a port
+^ - Micro Fusion occurred
+# - ESP Tracking sync uop was issued
+@ - SSE instruction followed an AVX256/AVX512 instruction, dozens of cycles penalty is expected
+X - instruction not supported, was not accounted in Analysis
+
+| Num Of   |                    Ports pressure in cycles                         |      |
+|  Uops    |  0  - DV    |  1   |  2  -  D    |  3  -  D    |  4   |  5   |  6   |  7   |
+-----------------------------------------------------------------------------------------
+|   1      |             |      | 1.0     1.0 |             |      |      |      |      | vmovsd xmm2, qword ptr [r11+r10*1+0x8]
+|   1      |             |      |             |             |      | 1.0  |      |      | inc r15
+|   2      |             | 1.0  |             | 1.0     1.0 |      |      |      |      | vaddsd xmm3, xmm2, qword ptr [r11+r12*1+0x10]
+|   2      | 1.0         |      | 1.0     1.0 |             |      |      |      |      | vaddsd xmm4, xmm3, qword ptr [r11+rbx*1+0x8]
+|   1      |             | 1.0  |             |             |      |      |      |      | vaddsd xmm1, xmm4, xmm1
+|   1      | 1.0         |      |             |             |      |      |      |      | vmulsd xmm5, xmm0, xmm1
+|   2      |             |      |             | 1.0         | 1.0  |      |      |      | vmovsd qword ptr [r11+r12*1+0x8], xmm5
+|   2      |             | 1.0  | 1.0     1.0 |             |      |      |      |      | vaddsd xmm6, xmm5, qword ptr [r11+r10*1+0x10]
+|   2      | 1.0         |      |             | 1.0     1.0 |      |      |      |      | vaddsd xmm7, xmm6, qword ptr [r11+r12*1+0x18]
+|   2      |             | 1.0  | 1.0     1.0 |             |      |      |      |      | vaddsd xmm8, xmm7, qword ptr [r11+rbx*1+0x10]
+|   1      | 1.0         |      |             |             |      |      |      |      | vmulsd xmm9, xmm0, xmm8
+|   2      |             |      |             | 1.0         | 1.0  |      |      |      | vmovsd qword ptr [r11+r12*1+0x10], xmm9
+|   2      |             | 1.0  | 1.0     1.0 |             |      |      |      |      | vaddsd xmm10, xmm9, qword ptr [r11+r10*1+0x18]
+|   2      | 1.0         |      |             | 1.0     1.0 |      |      |      |      | vaddsd xmm11, xmm10, qword ptr [r11+r12*1+0x20]
+|   2      |             | 1.0  | 1.0     1.0 |             |      |      |      |      | vaddsd xmm12, xmm11, qword ptr [r11+rbx*1+0x18]
+|   1      | 1.0         |      |             |             |      |      |      |      | vmulsd xmm13, xmm0, xmm12
+|   2      |             |      |             | 1.0         | 1.0  |      |      |      | vmovsd qword ptr [r11+r12*1+0x18], xmm13
+|   2      |             | 1.0  | 1.0     1.0 |             |      |      |      |      | vaddsd xmm14, xmm13, qword ptr [r11+r10*1+0x20]
+|   2      | 1.0         |      |             | 1.0     1.0 |      |      |      |      | vaddsd xmm15, xmm14, qword ptr [r11+r12*1+0x28]
+|   2      |             | 1.0  | 1.0     1.0 |             |      |      |      |      | vaddsd xmm16, xmm15, qword ptr [r11+rbx*1+0x20]
+|   1      | 1.0         |      |             |             |      |      |      |      | vmulsd xmm1, xmm0, xmm16
+|   2      |             |      |             | 1.0         | 1.0  |      |      |      | vmovsd qword ptr [r11+r12*1+0x20], xmm1
+|   1      |             |      |             |             |      |      | 1.0  |      | add r11, 0x20
+|   1*     |             |      |             |             |      |      |      |      | cmp r15, r14
+|   0*F    |             |      |             |             |      |      |      |      | jb 0xffffffffffffff6d
+Total Num Of Uops: 39
+Analysis Notes:
+Backend allocation was stalled due to unavailable allocation resources.

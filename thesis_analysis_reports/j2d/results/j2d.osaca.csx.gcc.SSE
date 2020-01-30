@@ -1,0 +1,60 @@
+Open Source Architecture Code Analyzer (OSACA) - v0.3
+Analyzed file:      j2d.s.csx.gcc.SSE.s
+Architecture:       csx
+Timestamp:          2020-01-28 22:54:25
+
+ P - Throughput of LOAD operation can be hidden behind a past or future STORE instruction
+ * - Instruction micro-ops not bound to a port
+ X - No throughput/latency information for this instruction in data file
+
+
+Combined Analysis Report
+------------------------
+                                     Port pressure in cycles                                     
+     |  0   - 0DV  |  1   |  2   -  2D  |  3   -  3D  |  4   |  5   |  6   |  7   ||  CP  | LCD  |
+-------------------------------------------------------------------------------------------------
+ 359 |             |      |             |             |      |      |      |      ||      |      |   .L28:
+ 360 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   movupd	16(%r8,%rax), %xmm11
+ 361 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   movupd	16(%rdi,%rax), %xmm12
+ 362 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   movupd	16(%rsi,%rax), %xmm13
+ 363 | 0.50        | 0.50 |             |             |      |      |      |      ||      |      |   addpd	%xmm11, %xmm15
+ 364 | 0.50        | 0.50 |             |             |      |      |      |      ||      |      |   addpd	%xmm13, %xmm12
+ 365 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   movupd	32(%rdi,%rax), %xmm14
+ 366 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   movupd	32(%rsi,%rax), %xmm0
+ 367 | 0.50        | 0.50 |             |             |      |      |      |      ||      |      |   addpd	%xmm15, %xmm12
+ 368 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   movupd	32(%r8,%rax), %xmm15
+ 369 | 0.50        | 0.50 |             |             |      |      |      |      ||      |      |   addpd	%xmm0, %xmm14
+ 370 | 0.50        | 0.50 |             |             |      |      |      |      ||      |      |   addpd	%xmm15, %xmm11
+ 371 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   movupd	48(%rdi,%rax), %xmm1
+ 372 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   movupd	48(%rsi,%rax), %xmm7
+ 373 | 0.50        | 0.50 |             |             |      |      |      |      ||      |      |   addpd	%xmm11, %xmm14
+ 374 | 0.50        | 0.50 |             |             |      |      |      |      ||      |      |   addpd	%xmm7, %xmm1
+ 375 | 0.50        | 0.50 |             |             |      |      |      |      ||      |      |   mulpd	%xmm2, %xmm12
+ 376 | 0.50        | 0.50 |             |             |      |      |      |      ||      |      |   mulpd	%xmm2, %xmm14
+ 377 |             |      | 0.50        | 0.50        | 1.00 |      |      |      ||      |      |   movups	%xmm12, 16(%rcx,%rax)
+ 378 |             |      | 0.50        | 0.50        | 1.00 |      |      |      ||      |      |   movups	%xmm14, 32(%rcx,%rax)
+ 379 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   movupd	48(%r8,%rax), %xmm14
+ 380 | 0.50        | 0.50 |             |             |      |      |      |      ||      |      |   addpd	%xmm14, %xmm15
+ 381 | 0.50        | 0.50 |             |             |      |      |      |      ||      |      |   addpd	%xmm15, %xmm1
+ 382 | 0.50        | 0.50 |             |             |      |      |      |      ||      |      |   mulpd	%xmm2, %xmm1
+ 383 |             |      | 0.50        | 0.50        | 1.00 |      |      |      ||      |      |   movups	%xmm1, 48(%rcx,%rax)
+ 384 | 0.00        | 0.00 |             |             |      | 0.25 | 0.75 |      ||  1.0 |  1.0 |   addq	$64, %rax
+ 385 |             |      |             |             |      |      |      |      ||      |      |   .L21:
+ 386 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   movupd	(%r8,%rax), %xmm15
+ 387 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   movupd	(%rdi,%rax), %xmm0
+ 388 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||  4.0 |      |   movupd	(%rsi,%rax), %xmm1
+ 389 | 0.50        | 0.50 |             |             |      |      |      |      ||      |      |   addpd	%xmm15, %xmm14
+ 390 | 0.25        | 0.75 |             |             |      |      |      |      ||  4.0 |      |   addpd	%xmm1, %xmm0
+ 391 |             | 0.00 |             |             |      | 1.00 |      |      ||      |      |   leaq	16(%rax), %r10
+ 392 | 0.50        | 0.50 |             |             |      |      |      |      ||  4.0 |      |   addpd	%xmm0, %xmm14
+ 393 | 0.75        | 0.25 |             |             |      |      |      |      ||  4.0 |      |   mulpd	%xmm2, %xmm14
+ 394 |             |      | 0.50        | 0.50        | 1.00 |      |      |      ||  0.0 |      |   movups	%xmm14, (%rcx,%rax)
+ 395 | 0.00        | 0.00 |             |             |      | 0.25 | 0.75 |      ||      |      |   cmpq	%r10, %r14
+ 396 |             |      |             |             |      |      |      |      ||      |      | * jne	.L28
+
+       8.00          8.00   8.00   6.00   8.00   6.00   4.00   1.50   1.50           17.0   1.0  
+
+
+Loop-Carried Dependencies Analysis Report
+-----------------------------------------
+ 384 |  1.0 | addq	$64, %rax                      | [384]

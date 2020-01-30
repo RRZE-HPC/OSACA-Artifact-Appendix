@@ -1,0 +1,52 @@
+Open Source Architecture Code Analyzer (OSACA) - v0.3
+Analyzed file:      daxpy.s.csx.gcc.s
+Architecture:       csx
+Timestamp:          2020-01-28 11:58:10
+
+ P - Throughput of LOAD operation can be hidden behind a past or future STORE instruction
+ * - Instruction micro-ops not bound to a port
+ X - No throughput/latency information for this instruction in data file
+
+
+Combined Analysis Report
+------------------------
+                                     Port pressure in cycles                                     
+     |  0   - 0DV  |  1   |  2   -  2D  |  3   -  3D  |  4   |  5   |  6   |  7   ||  CP  | LCD  |
+-------------------------------------------------------------------------------------------------
+ 341 |             |      |             |             |      |      |      |      ||      |      |   # LLVM-MCA-BEGIN
+ 342 |             |      |             |             |      |      |      |      ||      |      |   .L19:
+ 343 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   vmovupd	0(%r13,%rsi), %ymm14
+ 344 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   vmovupd	32(%r13,%rsi), %ymm15
+ 345 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   vmovupd	64(%r13,%rsi), %ymm1
+ 346 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   vmovupd	96(%r13,%rsi), %ymm0
+ 347 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   vmovupd	128(%r13,%rsi), %ymm3
+ 348 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   vmovupd	160(%r13,%rsi), %ymm4
+ 349 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   vmovupd	192(%r13,%rsi), %ymm5
+ 350 |             |      | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||  4.0 |      |   vmovupd	224(%r13,%rsi), %ymm7
+ 351 | 0.50        | 0.50 | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   vfmadd213pd	(%r12,%rsi), %ymm6, %ymm14
+ 352 | 0.50        | 0.50 | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   vfmadd213pd	32(%r12,%rsi), %ymm6, %ymm15
+ 353 | 0.50        | 0.50 | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   vfmadd213pd	64(%r12,%rsi), %ymm6, %ymm1
+ 354 | 0.50        | 0.50 | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   vfmadd213pd	96(%r12,%rsi), %ymm6, %ymm0
+ 355 | 0.50        | 0.50 | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   vfmadd213pd	128(%r12,%rsi), %ymm6, %ymm3
+ 356 | 0.50        | 0.50 | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   vfmadd213pd	160(%r12,%rsi), %ymm6, %ymm4
+ 357 | 0.50        | 0.50 | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||      |      |   vfmadd213pd	192(%r12,%rsi), %ymm6, %ymm5
+ 358 | 0.50        | 0.50 | 0.50   0.50 | 0.50   0.50 |      |      |      |      ||  4.0 |      |   vfmadd213pd	224(%r12,%rsi), %ymm6, %ymm7
+ 359 |             |      | 0.50        | 0.50        | 1.00 |      |      |      ||      |      |   vmovupd	%ymm14, (%r12,%rsi)
+ 360 |             |      | 0.50        | 0.50        | 1.00 |      |      |      ||      |      |   vmovupd	%ymm15, 32(%r12,%rsi)
+ 361 |             |      | 0.50        | 0.50        | 1.00 |      |      |      ||      |      |   vmovupd	%ymm1, 64(%r12,%rsi)
+ 362 |             |      | 0.50        | 0.50        | 1.00 |      |      |      ||      |      |   vmovupd	%ymm0, 96(%r12,%rsi)
+ 363 |             |      | 0.50        | 0.50        | 1.00 |      |      |      ||      |      |   vmovupd	%ymm3, 128(%r12,%rsi)
+ 364 |             |      | 0.50        | 0.50        | 1.00 |      |      |      ||      |      |   vmovupd	%ymm4, 160(%r12,%rsi)
+ 365 |             |      | 0.50        | 0.50        | 1.00 |      |      |      ||      |      |   vmovupd	%ymm5, 192(%r12,%rsi)
+ 366 |             |      | 0.50        | 0.50        | 1.00 |      |      |      ||  0.0 |      |   vmovupd	%ymm7, 224(%r12,%rsi)
+ 367 | 0.00        | 0.00 |             |             |      | 0.50 | 0.50 |      ||      |  1.0 |   addq	$256, %rsi
+ 368 | 0.00        | 0.00 |             |             |      | 0.50 | 0.50 |      ||      |      |   cmpq	%rsi, %r10
+ 369 |             |      |             |             |      |      |      |      ||      |      | * jne	.L19
+ 370 |             |      |             |             |      |      |      |      ||      |      |   # LLVM-MCA-END
+
+       4.00          4.00   12.0   8.00   12.0   8.00   8.00   1.00   1.00            8     1.0  
+
+
+Loop-Carried Dependencies Analysis Report
+-----------------------------------------
+ 367 |  1.0 | addq	$256, %rsi                     | [367]
