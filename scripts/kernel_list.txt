@@ -1,0 +1,9 @@
+copy
+add
+update
+sum_reduction
+daxpy
+triad
+striad
+gs
+j2d

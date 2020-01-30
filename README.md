@@ -99,7 +99,7 @@ at the end of the loop (note that the comment symbol may differ on different ISA
 
 For adding x86 byte markers, one may use:
 ```
-osaca --insert-marker --arch [ARCH] file.s
+osaca --insert-marker --arch ARCH file.s
 ```
 These byte markers are recognized by OSACA and IACA, therefore, we recommend to use this command on Intel CSX.
 Additionally, one must add the LLVM-MCA markers in the following format:
@@ -112,9 +112,9 @@ All marked assembly files can be also found in the kernel-specific directory in 
 
 The prediction generation must be done separately for Marvell ThunderX2 and the x86 systems. Run 
 ```
-./run_predictions.sh [ISA]
+./run_predictions.sh ISA
 ```
-The parameter `ISA` can be either `AArch64` or `x86`.
+The parameter `ISA` can be either `aarch64` or `x86`.
 Note that for this we expect the commands `osaca`, `llvm-mca`, `iaca`, and `gcc` to be part of the environment.
 
 
