@@ -108,6 +108,7 @@ Additionally, one must add the LLVM-MCA markers in the following format:
 ...
 # LLVM-MCA-END
 ```
+All marked assembly files can be also found in the kernel-specific directory in [thesis_analysis_reports/](./thesis_analysis_reports).
 
 The prediction generation must be done separately for Marvell ThunderX2 and the x86 systems. Run 
 ```
@@ -125,7 +126,7 @@ Run the evaluation with
 ```
 ./run_evaluation.sh
 ```
-It outputs performance measurements and analysis results in the format of Table B.1 in the thesis.
+It writes a file `summary_table.csv` containing the performance measurements and analysis results in the format of Table B.1 in the thesis.
 Compare numbers to Table B.1.
 We expect these numbers to lie within 10% of those in the paper, if run on the same micro architectures as mentioned. If your numbers are significantly faster, turbo mode or frequency scaling might be the reson. If they are slower, while running on a laptop or desktop machine, energy saving features may have interfered.
 
