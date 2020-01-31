@@ -61,7 +61,7 @@ if [[ $ARCH == 0 ]]; then
     if [[ $ALL == 1 ]]; then
         # Compile all
         $INTELC $X86ICCFLAGS -xCORE-AVX512 -qopt-zmm-usage=high -Ofast -c $KERNEL.f90
-        $INTELC $X86ICCFLAGS -xCORE-AVX512 -qopt-zmm-usage=high -Ofast -S $KERNEL.f90-o $KERNEL.s.csx.icc.s
+        $INTELC $X86ICCFLAGS -xCORE-AVX512 -qopt-zmm-usage=high -Ofast -S $KERNEL.f90 -o $KERNEL.s.csx.icc.s
         $INTELC $KERNEL.o timing.o -lm -o a.$KERNEL.csx.icc
         $GNUC $X86GCCFLAGS -march=skylake-avx512 -Ofast -c $KERNEL.f90
         $GNUC $X86GCCFLAGS -march=skylake-avx512 -Ofast -S $KERNEL.f90 -o $KERNEL.s.csx.gcc.s
@@ -69,7 +69,7 @@ if [[ $ARCH == 0 ]]; then
     elif [[ $CC == i* ]]; then
         # ICC --> CC=icc/ifort
         $CC $X86ICCFLAGS -xCORE-AVX512 -qopt-zmm-usage=high -Ofast -c $KERNEL.f90
-        $CC $X86ICCFLAGS -xCORE-AVX512 -qopt-zmm-usage=high -Ofast -S $KERNEL.f90-o $KERNEL.s.csx.icc.s
+        $CC $X86ICCFLAGS -xCORE-AVX512 -qopt-zmm-usage=high -Ofast -S $KERNEL.f90 -o $KERNEL.s.csx.icc.s
         $CC $KERNEL.o timing.o -lm -o a.$KERNEL.csx.icc
     else
         # GCC --> CC=gcc/gfortran
