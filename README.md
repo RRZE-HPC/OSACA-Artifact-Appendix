@@ -45,7 +45,7 @@ We ran on an AMD EPYC 7451 (Zen architecture) at 2.3 GHz (fixed, turbo disabled)
   - [pyparsing](https://github.com/pyparsing/pyparsing)
   - [pygraphviz](https://pygraphviz.github.io/)
   - [Kerncraft](https://github.com/RRZE-HPC/kerncraft)
-- [OSACA](https://github.com/RRZE-HPC/OSACA) v0.3.2.dev4
+- [OSACA](https://github.com/RRZE-HPC/OSACA) v0.3.2.dev5
 - [likwid](https://github.com/RRZE-HPC/likwid/) (for fixing the frequency)
 - [IACA v3.0](https://software.intel.com/en-us/articles/intel-architecture-code-analyzer)
 - [LLVM-MCA 9](https://llvm.org/docs/CommandGuide/llvm-mca.html)
@@ -57,7 +57,7 @@ None necessary, everything is part of the code.
 On Ubuntu 18.04 install OSACA and likwid with:
 ```
 apt install python3 python3-pip likwid libgraphviz-dev
-pip3 install osaca==0.3.2.dev4 pygraphviz kerncraft
+pip3 install osaca==0.3.2.dev5 pygraphviz kerncraft
 ```
 
 [IACA](https://software.intel.com/en-us/articles/intel-architecture-code-analyzer) and [LLVM-MCA](http://releases.llvm.org/), are available at the website of the vendors.
@@ -116,7 +116,7 @@ the prediction generation must be done separately for LLVM-MCA on Marvell Thunde
 ./run_predictions.sh ISA
 ```
 The parameter `ISA` can be either `aarch64` (for running LLVM-MCA on TX2) or `x86` (for running the rest).
-Note that for this we expect the commands `osaca`, `llvm-mca`, `iaca`, and `gcc` to be part of the environment.
+Note that for this we expect the commands `llvm-mca`&nbsp;(for all runs) and `osaca`, `iaca`, and `gcc`&nbsp;(for the x86 run) to be part of the environment.
 
 
 ## A.5 Evaluation and expected result
