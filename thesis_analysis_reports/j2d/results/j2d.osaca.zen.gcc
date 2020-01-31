@@ -1,0 +1,56 @@
+Open Source Architecture Code Analyzer (OSACA) - v0.3
+Analyzed file:      j2d.s.zen.gcc.s
+Architecture:       zen1
+Timestamp:          2020-01-31 14:57:50
+
+ P - Throughput of LOAD operation can be hidden behind a past or future STORE instruction
+ * - Instruction micro-ops not bound to a port
+ X - No throughput/latency information for this instruction in data file
+
+
+Combined Analysis Report
+------------------------
+                                               Port pressure in cycles                                                
+     |  0   |  1   |  2   |  3   - 3DV  |  4   |  5   |  6   |  7   |  8   |  9   |  8D  |  9D  |  ST  ||  CP  | LCD  |
+----------------------------------------------------------------------------------------------------------------------
+ 352 |      |      |      |             |      |      |      |      |      |      |      |      |      ||      |      |   .L28:
+ 353 |      |      |      |             |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||      |      |   vmovups	(%r10,%rcx), %xmm5
+ 354 |      |      |      |             |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||      |      |   vmovups	32(%r10,%rax), %xmm13
+ 355 |      |      |      |             |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||      |      |   vmovups	(%rdi,%rcx), %xmm1
+ 356 |      |      |      |             |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||      |      |   vmovups	32(%rdi,%rax), %xmm14
+ 357 |      |      |      |             |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||      |      |   vmovups	48(%rdi,%rax), %xmm9
+ 358 |      |      | 0.50 | 0.50        |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||      |      |   vaddpd	(%r8,%rcx), %xmm1, %xmm10
+ 359 |      |      | 0.50 | 0.50        |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||      |      |   vaddpd	32(%r8,%rax), %xmm14, %xmm15
+ 360 |      |      | 0.50 | 0.50        |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||      |      |   vaddpd	48(%r8,%rax), %xmm9, %xmm1
+ 361 |      |      | 0.50 | 0.50        |      |      |      |      |      |      |      |      |      ||      |      |   vaddpd	%xmm5, %xmm8, %xmm8
+ 362 |      |      | 0.50 | 0.50        |      |      |      |      |      |      |      |      |      ||      |      |   vaddpd	%xmm13, %xmm5, %xmm6
+ 363 |      |      |      |             |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||      |      |   vmovups	48(%r10,%rax), %xmm5
+ 364 |      |      | 0.50 | 0.50        |      |      |      |      |      |      |      |      |      ||      |      |   vaddpd	%xmm8, %xmm10, %xmm11
+ 365 |      |      | 0.50 | 0.50        |      |      |      |      |      |      |      |      |      ||      |      |   vaddpd	%xmm6, %xmm15, %xmm0
+ 366 | 0.50 | 0.50 |      |             |      |      |      |      |      |      |      |      |      ||      |      |   vmulpd	%xmm2, %xmm11, %xmm12
+ 367 |      |      | 0.50 | 0.50        |      |      |      |      |      |      |      |      |      ||      |      |   vaddpd	%xmm5, %xmm13, %xmm4
+ 368 | 0.50 | 0.50 |      |             |      |      |      |      |      |      |      |      |      ||      |      |   vmulpd	%xmm2, %xmm0, %xmm7
+ 369 |      |      | 0.50 | 0.50        |      |      |      |      |      |      |      |      |      ||      |      |   vaddpd	%xmm4, %xmm1, %xmm10
+ 370 |      |      |      |             |      |      |      |      | 0.50 | 0.50 |      |      | 1.00 ||      |      |   vmovups	%xmm12, (%rsi,%rcx)
+ 371 |      |      |      |             |      |      |      |      | 0.50 | 0.50 |      |      | 1.00 ||      |      |   vmovups	%xmm7, 32(%rsi,%rax)
+ 372 | 0.50 | 0.50 |      |             |      |      |      |      |      |      |      |      |      ||      |      |   vmulpd	%xmm2, %xmm10, %xmm8
+ 373 |      |      |      |             |      |      |      |      | 0.50 | 0.50 |      |      | 1.00 ||      |      |   vmovups	%xmm8, 48(%rsi,%rax)
+ 374 |      |      |      |             | 0.25 | 0.25 | 0.25 | 0.25 |      |      |      |      |      ||  1.0 |  1.0 |   addq	$64, %rax
+ 375 |      |      |      |             |      |      |      |      |      |      |      |      |      ||      |      |   .L21:
+ 376 |      |      |      |             |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||      |      |   vmovups	(%r10,%rax), %xmm8
+ 377 |      |      |      |             |      |      |      |      | 0.50 | 0.50 |      |      |      ||      |      |   leaq	16(%rax), %rcx
+ 378 |      |      |      |             |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||  4.0 |      |   vmovups	(%rdi,%rax), %xmm9
+ 379 |      |      | 0.50 | 0.50        |      |      |      |      | 0.50 | 0.50 | 0.50 | 0.50 |      ||  3.0 |      |   vaddpd	(%r8,%rax), %xmm9, %xmm10
+ 380 |      |      | 0.50 | 0.50        |      |      |      |      |      |      |      |      |      ||      |      |   vaddpd	%xmm8, %xmm5, %xmm11
+ 381 |      |      | 0.50 | 0.50        |      |      |      |      |      |      |      |      |      ||  3.0 |      |   vaddpd	%xmm11, %xmm10, %xmm12
+ 382 | 0.50 | 0.50 |      |             |      |      |      |      |      |      |      |      |      ||  4.0 |      |   vmulpd	%xmm2, %xmm12, %xmm13
+ 383 |      |      |      |             |      |      |      |      | 0.50 | 0.50 |      |      | 1.00 ||  0.0 |      |   vmovups	%xmm13, (%rsi,%rax)
+ 384 |      |      |      |             | 0.25 | 0.25 | 0.25 | 0.25 |      |      |      |      |      ||      |      |   cmpq	%rcx, %r14
+ 385 |      |      |      |             |      |      |      |      |      |      |      |      |      ||      |      | * jne	.L28
+
+       2.00   2.00   6.00   6.00          0.50   0.50   0.50   0.50   8.50   8.50   6.00   6.00   4.00    15.0   1.0  
+
+
+Loop-Carried Dependencies Analysis Report
+-----------------------------------------
+ 374 |  1.0 | addq	$64, %rax                      | [374]
