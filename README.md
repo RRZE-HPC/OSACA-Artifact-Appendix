@@ -122,8 +122,9 @@ Note that for this we expect the commands `llvm-mca`&nbsp;(for all runs) and `os
 ## A.5 Evaluation and expected result
 The evaluation script expects a fixed frequency of 2.5 GHz on CSX, 2.3 GHz on Zen and 2.2 GHz on TX2.
 If the measurements were obtained with any different clock frequency, one must edit the `FREQ` variable in the script.
+
 It further expects the same unrolling factor for a kernel that is stated in the thesis.
-If your created assembly kernel differs in terms of the unrolling factor (e.g., due to a different compiler version), please adjust the [unrolling_factor_dict.py](./scripts/unrolling_factor_dict.py) in the [scripts](./scripts) directory accordingly.
+If the created assembly kernels differ in terms of the unrolling factor (e.g., due to a different compiler version), please adjust the [unrolling_factor_dict.py](./scripts/unrolling_factor_dict.py) in the [scripts](./scripts) directory accordingly.
 
 Run the evaluation with
 ```
