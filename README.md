@@ -1,5 +1,5 @@
 # Artifact Description: Cross-Architecture Automatic Critical Path Detection For In-Core Performance Analysis
-Jan Laukemann, Computer Science University of Erlangen-Nürnberg, jan.laukemann@fau.de
+Jan Laukemann, University of Erlangen-Nürnberg, jan.laukemann@fau.de
 
 ## A.1 Abstract
 The creation of performance models is an essential part of optimizing scientific software.
