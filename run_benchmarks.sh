@@ -2,7 +2,7 @@
 
 HOME="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 KERNELS=`cat $HOME/scripts/kernel_list.txt`
-ITERATIONS=10
+ITERATIONS=5
 
 # Check parameters
 while test $# -gt 0; do

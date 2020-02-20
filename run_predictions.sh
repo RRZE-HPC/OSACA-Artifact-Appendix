@@ -53,7 +53,7 @@ while test $# -gt 0; do
             ;;
         x86|x86)
             ISA="X86"
-            ARCHS="csx tx2 zen"
+            ARCHS="csx"
             shift
             ;;
         *)

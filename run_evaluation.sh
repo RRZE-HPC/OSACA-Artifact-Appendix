@@ -11,7 +11,7 @@ FREQ_ZEN=2.3
 HOME="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 KERNELS=`cat $HOME/scripts/kernel_list.txt`
 OUTFILE="$HOME/summary_table.csv"
-ARCHS="tx2 csx zen"
+ARCHS="csx"
 
 
 get_llvm_data() {

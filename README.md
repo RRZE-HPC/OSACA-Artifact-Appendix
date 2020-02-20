@@ -17,7 +17,9 @@ The predictions are compared with actual measurements and the analysis results f
 The comparison shows that OSACA is to date the most capable and versatile in-core runtime prediction tool available.
 
 ## A.2 Description
-*NOTE: This is the Intel-only branch of the original repository to reproduce the results on an Intel machine.*
+*NOTE: This is the Intel-only branch of the original repository to reproduce the results for the Sch√nauer Triad benchmark and the 2D Jacobi Stencil benchmark on an Intel machine.*
+
+**(For reproducing results for all kernels or results on different machines, check out the master branch)**
 
 ### A.2.1 Check-list for reproducing results
 - Compilation: 
@@ -94,7 +96,7 @@ at the end of the loop.
 
 For adding x86 byte markers, one may also use:
 ```
-osaca --insert-marker --arch ARCH file.s
+osaca --insert-marker --arch CSX file.s
 ```
 These byte markers are recognized by OSACA and IACA, therefore, we recommend to use this command on Intel CSX.
 Additionally, one must add the LLVM-MCA markers in the following format:
@@ -103,13 +105,19 @@ Additionally, one must add the LLVM-MCA markers in the following format:
 ...
 # LLVM-MCA-END
 ```
+For simply adding the LLVM-MCA markers between the OSACA markers, run
+```
+cd benchmark
+for d in *; do cd $d; for f in *s.csx.*s; do sed -i '/# pointer_increment=/a # LLVM-MCA-BEGIN' $f; sed -i '/movl\s*$222/i # LLVM-MCA-END' $f; done; cd ../; done
+cd ../
+```
 All marked assembly files can be also found in the kernel-specific directory in [thesis_analysis_reports/](./thesis_analysis_reports).
 
 For the prediction generation, run 
 ```
 ./run_predictions.sh x86
 ```
-Note that for this we expect the commands `llvm-mca`&nbsp;(for all runs) and `osaca`, `iaca`, and `gcc`&nbsp;(for the x86 run) to be part of the environment.
+Note that for this we expect the commands `llvm-mca`, `osaca`, `iaca`, and `gcc` to be part of the environment.
 
 
 ## A.5 Evaluation and expected result
