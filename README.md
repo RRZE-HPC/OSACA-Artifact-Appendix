@@ -17,7 +17,7 @@ The predictions are compared with actual measurements and the analysis results f
 The comparison shows that OSACA is to date the most capable and versatile in-core runtime prediction tool available.
 
 ## A.2 Description
-*NOTE: This is the Intel-only branch of the original repository to reproduce the results for the Sch√nauer Triad benchmark and the 2D Jacobi Stencil benchmark on an Intel machine.*
+*NOTE: This is the Intel-only branch of the original repository to reproduce the results for the Sch√Énauer Triad benchmark and the 2D Jacobi Stencil benchmark on an Intel machine.*
 
 **(For reproducing results for all kernels or results on different machines, check out the master branch)**
 
