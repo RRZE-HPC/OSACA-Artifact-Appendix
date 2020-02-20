@@ -17,26 +17,22 @@ The predictions are compared with actual measurements and the analysis results f
 The comparison shows that OSACA is to date the most capable and versatile in-core runtime prediction tool available.
 
 ## A.2 Description
+*NOTE: This is the Intel-only branch of the original repository to reproduce the results on an Intel machine.*
 
 ### A.2.1 Check-list for reproducing results
 - Compilation: 
-  - ARM:
-    - [Arm C/C++/Fortran Compiler version&nbsp;19.2](https://developer.arm.com/tools-and-software/server-and-hpc/compile/arm-compiler-for-linux)
-    - [GNU C/Fortran Compiler version&nbsp;8.2.0](https://gcc.gnu.org/gcc-8/)
   - x86:
     - [Intel Parallel Studio version 19.0up05](https://software.intel.com/en-us/compilers)
     - [GNU C/Fortran Compiler version&nbsp;9.1.0](https://gcc.gnu.org/gcc-9/)
-- Binary: x86,  ARM aarch64
+- Binary: x86
 - Hardware:
-  - Marvell ThunderX2
   - Intel Cascade Lake
-  - AMD Zen
 
 ### A.2.2 How software can be obtained
 Check out https://github.com/RRZE-HPC/OSACA
 
 ### A.2.3 Hardware dependencies
-We ran on an AMD EPYC 7451 (Zen architecture) at 2.3 GHz (fixed, turbo disabled), an Intel Xeon Gold 6248 (Cascade Lake SP architecture) at 2.5 GHz (fixed, turbo disabled) and an ARM-based Marvell ThunderX2 9980 at 2.2 GHz (natively fixed). The results should be reproducible on any Zen1, Skylake SP, and ThunderX2 processors. Fixing the frequency and disabling turbo is vital for experiment reproduction.
+We ran on an an Intel Xeon Gold 6248 (Cascade Lake SP architecture) at 2.5 GHz (fixed, turbo disabled). The results should be reproducible on any Skylake SP processor. Fixing the frequency and disabling turbo is vital for experiment reproduction.
 
 ### A.2.4 Software dependencies
 - Python >= 3.5, with the following packages installed:
@@ -69,6 +65,7 @@ Download this repository including all scripts and benchmark codes:
 ```
 git clone https://github.com/RRZE-HPC/OSACA-Artifact-Appendix
 cd OSACA-Artifact-Appendix/
+git checkout intel
 ```
 
 ### A.4.1 Run measurements
@@ -77,27 +74,25 @@ Fix frequencies and disable turbo mode on CPU (for 2.3 GHz, or which ever freque
 ```
 likwid-setFrequencies -t 0 -f 2.3
 ```
-Generate performance results (must be done on AMD Zen, Intel Cascade Lake SP and Marvell ThunderX2 machines) with
+Generate performance results with
 ```
-./run_benchmarks.sh [ARCH]
+./run_benchmarks.sh CSX
 ```
-The parameter `ARCH` can be either `CSX`, `ZEN1` or `TX2`.
-Note that for this we expect the commands `icc`, `ifort`, `gcc`, `gfortran`, `armclang`, and `armflang` to be part of the environment.
+Note that for this we expect the commands `icc`, `ifort`, `gcc`, and `gfortran` to be part of the environment.
 
 ### A.4.2 Run performance analysis
 Make sure to have the assembly output created (e.g., by running `run_benchmarks.sh` first) and the kernel marked.
-The ARM byte markers must be inserted by hand at the time of writing.
-The OSACA markers for both x86 and ARM can be inserted as comment line, containing
+The OSACA markers can be inserted as comment line, containing
 ```
-// OSACA-BEGIN
+# OSACA-BEGIN
 ```
-in front the loop and 
+in front of the loop and 
 ```
-// OSACA-END
+# OSACA-END
 ```
-at the end of the loop (note that the comment symbol may differ on different ISAs).
+at the end of the loop.
 
-For adding x86 byte markers, one may use:
+For adding x86 byte markers, one may also use:
 ```
 osaca --insert-marker --arch ARCH file.s
 ```
@@ -110,17 +105,15 @@ Additionally, one must add the LLVM-MCA markers in the following format:
 ```
 All marked assembly files can be also found in the kernel-specific directory in [thesis_analysis_reports/](./thesis_analysis_reports).
 
-Since the `-mcpu=thunderx2t99` flag is only known to the ARM compiler,
-the prediction generation must be done separately for LLVM-MCA on Marvell ThunderX2 and all others. Run 
+For the prediction generation, run 
 ```
-./run_predictions.sh ISA
+./run_predictions.sh x86
 ```
-The parameter `ISA` can be either `aarch64` (for running LLVM-MCA on TX2) or `x86` (for running the rest).
 Note that for this we expect the commands `llvm-mca`&nbsp;(for all runs) and `osaca`, `iaca`, and `gcc`&nbsp;(for the x86 run) to be part of the environment.
 
 
 ## A.5 Evaluation and expected result
-The evaluation script expects a fixed frequency of 2.5 GHz on CSX, 2.3 GHz on Zen and 2.2 GHz on TX2.
+The evaluation script expects a fixed frequency of 2.5 GHz on CSX.
 If the measurements were obtained with any different clock frequency, one must edit the `FREQ` variable in the script.
 
 It further expects the same unrolling factor for a kernel that is stated in the thesis.
