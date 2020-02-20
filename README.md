@@ -106,7 +106,7 @@ Additionally, one must add the LLVM-MCA markers in the following format:
 ```
 For simply adding the LLVM-MCA markers between the OSACA markers, run
 ```
-cd benchmark
+cd benchmarks
 for d in *; do cd $d; for f in *s.csx.*s; do sed -i '/# pointer_increment=/a # LLVM-MCA-BEGIN' $f; sed -i '/movl\s*$222/i # LLVM-MCA-END' $f; done; cd ../; done
 cd ../
 ```
