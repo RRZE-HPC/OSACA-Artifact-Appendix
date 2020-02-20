@@ -1,6 +1,10 @@
 # Artifact Description: Cross-Architecture Automatic Critical Path Detection For In-Core Performance Analysis
 Jan Laukemann, University of Erlangen-Nürnberg, jan.laukemann@fau.de
 
+*NOTE: This is the Intel-only branch of the original repository to reproduce the results for the Schönauer Triad benchmark and the 2D Jacobi Stencil benchmark on an Intel machine.*
+
+**(For reproducing results for all kernels or results on different machines, check out the master branch)**
+
 ## A.1 Abstract
 The creation of performance models is an essential part of optimizing scientific software.
 To run static performance analyses on code snippets, it is crucial to obtain an accurate in-core execution time, which is highly dependent on the micro-architecture of the chip.
@@ -17,10 +21,6 @@ The predictions are compared with actual measurements and the analysis results f
 The comparison shows that OSACA is to date the most capable and versatile in-core runtime prediction tool available.
 
 ## A.2 Description
-*NOTE: This is the Intel-only branch of the original repository to reproduce the results for the SchÃnauer Triad benchmark and the 2D Jacobi Stencil benchmark on an Intel machine.*
-
-**(For reproducing results for all kernels or results on different machines, check out the master branch)**
-
 ### A.2.1 Check-list for reproducing results
 - Compilation: 
   - x86:
