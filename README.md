@@ -71,15 +71,15 @@ git checkout intel
 
 ### A.4.1 Run measurements
 Fixing the frequency and disabling turbo is very important to verify our results.
-Fix frequencies and disable turbo mode on CPU (for 2.3 GHz, or which ever frequency your CPU will be stable on):
+Fix frequencies and disable turbo mode on CPU (for 2.5 GHz, or which ever frequency your CPU will be stable on):
 ```
-likwid-setFrequencies -t 0 -f 2.3
+likwid-setFrequencies -t 0 -f 2.5
 ```
 Generate performance results with
 ```
 ./run_benchmarks.sh CSX
 ```
-Note that for this we expect the commands `icc`, `ifort`, `gcc`, and `gfortran` to be part of the environment.
+Note that for this we expect the commands `icc` and `gcc` to be part of the environment.
 
 ### A.4.2 Run performance analysis
 Make sure to have the assembly output created (e.g., by running `run_benchmarks.sh` first) and the kernel marked.
@@ -121,7 +121,7 @@ Note that for this we expect the commands `llvm-mca`, `osaca`, `iaca`, and `gcc`
 
 ## A.5 Evaluation and expected result
 The evaluation script expects a fixed frequency of 2.5 GHz on CSX.
-If the measurements were obtained with any different clock frequency, one must edit the `FREQ` variable in the script.
+If the measurements were obtained with any different clock frequency, one must edit the `FREQ` variable in the `run_evaluation.sh` script.
 
 It further expects the same unrolling factor for a kernel that is stated in the thesis.
 If the created assembly kernels differ in terms of the unrolling factor (e.g., due to a different compiler version), please adjust the [unrolling_factor_dict.py](./scripts/unrolling_factor_dict.py) in the [scripts](./scripts) directory accordingly.
