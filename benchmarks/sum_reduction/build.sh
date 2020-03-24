@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 KERNEL="sum_reduction"
 INTELC=icc

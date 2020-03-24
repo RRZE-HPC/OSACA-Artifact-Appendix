@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 HOME="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 KERNELS=`cat $HOME/scripts/kernel_list.txt`
